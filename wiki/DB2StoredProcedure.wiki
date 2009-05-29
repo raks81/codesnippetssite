@@ -2,8 +2,7 @@
 #labels storedprocedure,db2
 
 = Introduction =
-
-Add your content here.
+I am not a database guy, but this one time I was cornered into writing a stored procedure on DB2 8.1. Below is the code which was written totally by googling around and painfully walking thru DB2 documentation. I am putting it here just a reference to stored proc syntax and DB2's basic control structs like if-else, while, using cursors etc.
 
 
 = Details =
@@ -21,6 +20,7 @@ language SQL
 -- SQL Stored Procedure
 ------------------------------------------------------------------------
 
+--begin atomic apparently start a transaction. (Not a 100% sure if that what it means)
 p1: begin atomic
 
 DECLARE LOOP_COUNTER INTEGER DEFAULT 0;
@@ -30,18 +30,21 @@ DECLARE cur_deploy_id BIGINT;
 DECLARE deploy_id_exists CHAR(1) DEFAULT 'y';
 DECLARE cur_event_id BIGINT;
 
+--Cursors are used to hold the results of a select statement
 DECLARE cursor1 CURSOR FOR
         SELECT DEPLOYMENT_ID FROM SCHEMA_NAME.RT_DEPLOYMENT WHERE DEPLOYMENT_NAME = VAR_DEPLOY_DESC;
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET deploy_id_exists = 'n';
 OPEN cursor1;
 FETCH cursor1 INTO cur_deploy_id;
 
+--If-else
 IF  deploy_id_exists = 'n' THEN
         --Insert a new deploy ID
         insert into SCHEMA_NAME.RT_DEPLOYMENT (DEPLOYMENT_ID, DEPLOYMENT_NAME, APPLICATION_DESC, SOA_LAYER_DESC)
                 values (default, VAR_DEPLOY_DESC,  VAR_APP_DESC, VAR_SOA_LAYER);
         set cur_deploy_id = IDENTITY_VAL_LOCAL();
 END IF;
+
 
 INSERT INTO SCHEMA_NAME.RT_EVENT
         (EVENT_ID, EVENT_DESC, SHORT_MESSAGE_DESC, EVENT_TSTP,
@@ -52,6 +55,7 @@ VALUES (DEFAULT, VAR_EVENT_DESC, VAR_SHORT_MESS, VAR_TIME_STP ,
        VAR_PROG_LANG, VAR_REQ_IDENTITY, VAR_SESSION_ID, VAR_LINE_NO );
 set cur_event_id =  IDENTITY_VAL_LOCAL();
 
+--While loop
 WHILE (LOOP_COUNTER <= 3) DO
     SET NAME1 = 'name';
     SET VALUE1 = 'value';
