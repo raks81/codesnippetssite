@@ -17,8 +17,6 @@ This code was written to be run in development environment and not meant for pro
 {{{
 # Jython script to install a EAR or WAR in WebSphere Application Server
 #
-# Author: Rakshith Rao
-
 
 import sys
 
