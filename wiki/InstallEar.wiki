@@ -1,8 +1,16 @@
-#summary One-sentence summary of this page.
+#summary This is wsadmin Jython code snippet to install a WAR/EAR file in WebSphere Application Server
+
 
 = Introduction =
+This is wsadmin Jython code snippet to install a WAR/EAR file in WebSphere Application Server. The script takes path to the WAR or EAR file and the context root of the web app as the parameter, installs the application on the server and starts the app. 
 
-This is code snippet to install a WAR/EAR file in WebSphere Application Server
+The code was written to install standalone WAR on WebSphere App Server (There is nice big reason why it was wrapped in an EAR, but that is another story.)
+
+The motivation was the way WAS 6.1 installs standalone WARs when done via wsadmin command prompt. wasadmin picks the war file (say, my-war-file.war) and installes it as my-war-file.warBCBGMAX4234. The weird chars at the end changes every time it is deployed, because of which using command prompt was a pain. After installation the snippet matches the installed war with the list of apps installed using file name and then starts the application. 
+
+Disclaimer:
+Also the code was tested while installing WAR file only and NOT with EAR. May need some changes in the way context-root is handled for it to work with EAR.
+This code was written to be run in development environment and not meant for production usage (although with some exception handling and parametrization it can be). 
 
 
 = Details =
