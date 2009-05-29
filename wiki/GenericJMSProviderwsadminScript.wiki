@@ -2,7 +2,7 @@
 #labels JCAPS,webspheregenericJMSProvider,wsadminscript
 
 = Introduction =
-This wsadmin Jython script created a a generic JMS provider and sets up a queue connection factory and queue destination. JCAPS 5.1.x was the message queue used and we were successfully able to connect to it from the application using JMS interface. The configuration details here should help if you are trying to set up JCAPS 5.1.x as the message queue and trying to connect to it from WebSphere Application Server 6.1.
+This wsadmin Jython script creates a a generic JMS provider and sets up a queue connection factory and queue destination. JCAPS 5.1.x was the message queue used and we were successfully able to connect to it from a web app running on WebSphere Application Server 6.1 using JMS interface. The configuration details here should help if you are trying to set up JCAPS 5.1.x as the message queue and trying to connect to it from WebSphere Application Server 6.1.
 
 = Details =
 {{{
@@ -19,7 +19,7 @@ serverURL = '/Cell:'+cellName+'/Node:'+nodeName+'/Server:'+serverName
 #JCAPS Configuration related variables
 jcapsUserID = "Admin"
 jcapsPwd = "pwd"
-jcapsHost = "122.32.55.233"
+jcapsHost = "122.32.55.233" (Some random IP)
 jcapsPort = "18007"
 
 print '\n\n-------------------------------------------------------------------'
@@ -64,8 +64,8 @@ if server:
     #Create QCF
     print "\nCreating Queue Connection Factory..."#,AdminConfig.attributes('GenericJMSConnectionFactory')
     newjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName)
-    name = ['name', 'JMSAppenderQCF']
-    jndi = ['jndiName', 'jms/JMSAppenderQCF']
+    name = ['name', 'JMSTestQCF']
+    jndi = ['jndiName', 'jms/JMSTestQCF']
     externaljndi = ['externalJNDIName', 'connectionfactories/queueconnectionfactory']
     mqcfAttrs = [name, jndi, externaljndi]
     print "Creating QCF with these configuration: \n\t", mqcfAttrs
@@ -77,8 +77,8 @@ if server:
     #Create Queue
     print "\nCreating Queue..."    
     newjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName)    
-    qname = ['name', 'JMSAppenderQ']    
-    qjndi = ['jndiName', 'jms/JMSAppenderQ']    
+    qname = ['name', 'JMSTestQ']    
+    qjndi = ['jndiName', 'jms/JMSTestQ']    
     qexternaljndi = ['externalJNDIName', 'queCSF']    
     mqAttrs = [qname, qjndi, qexternaljndi]    
     print "Creating Q with these configuration: \n\t", mqAttrs    
