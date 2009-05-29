@@ -1,0 +1,28 @@
+#summary Basic WebSphere Application Server Administration using wsadmin
+#labels wsadmin,installWarEar,command
+
+= Introduction =
+
+This one is not a code snippet, but just some basic wsadmin commands used to connect to and install a war in WebSphere application serve 6.1.
+
+
+= Details =
+
+===Starting admin app:===
+>cd D:\Program Files\IBM\SDP70\runtimes\base_v61\profiles\AppSrv01\bin
+>wsadmin.bat
+ 
+===Install WAR:===
+wsadmin>$AdminApp install "c:/ra/raks/blah.war" {-contextroot /osgi -defaultbinding.virtual.host default_host -usedefaultbindings}
+ 
+-Note the 'front slashes' (/) in the path of the war file
+-The extra arguments are passed in {}
+
+wsadmin>$AdminConfig save
+
+===Starting application:===
+wsadmin>set appManager [$AdminControl queryNames type=ApplicationManager,*]
+wsadmin>$AdminControl invoke $appManager startApplication myApplication
+
+===Uninstall App:===
+$AdminApp uninstall appName
