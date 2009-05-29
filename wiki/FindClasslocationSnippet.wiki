@@ -24,7 +24,8 @@ public class ClassLocation {
 	}
 	
 	public static void main(String[] args) {
-		getClassLocation(Object.class);
+		System.out.println(getClassLocation(Object.class));
 	}
 }
+
 }}}
