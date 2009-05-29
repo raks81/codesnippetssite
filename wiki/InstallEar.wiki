@@ -19,7 +19,9 @@ This code was written to be run in development environment and not meant for pro
 #
 # Author: Rakshith Rao
 
+
 import sys
+
 #Some Global variables
 #WebSphere environment related variables
 cellName = 'testvmNode01Cell'
@@ -34,9 +36,11 @@ print "\tc:\\\\osgiapps\\\\war-to-install.war (With double back-slashes)"
 print "\nPlease edit the variables in the script if these defaults need to be changed."
 print '-------------------------------------------------------------------\n\n'
 
+
 numberOfArgs = len(sys.argv)
 if numberOfArgs < 2:
     print "Usage: installApp.py {file-absolute-path} {context-root}"
+
 
 else:
     #Get the absolute path of the WAR file and replace \ with /
