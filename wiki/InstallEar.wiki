@@ -1,4 +1,5 @@
 #summary This is wsadmin Jython code snippet to install a WAR/EAR file in WebSphere Application Server
+#labels wsadmin,installapplication
 
 
 = Introduction =
