@@ -17,9 +17,9 @@ serverName = 'server1'
 serverURL = '/Cell:'+cellName+'/Node:'+nodeName+'/Server:'+serverName
 
 #JCAPS Configuration related variables
-jcapsUserID = "Admin"
-jcapsPwd = "pwd"
-jcapsHost = "122.32.55.233" (Some random IP)
+jcapsUserID = "Administrator"
+jcapsPwd = "STC"
+jcapsHost = "10.90.21.15"
 jcapsPort = "18007"
 
 print '\n\n-------------------------------------------------------------------'
@@ -29,63 +29,75 @@ print "\nUsing these JCAPS defaults:"+"\nHost: "+jcapsHost+"\nPort: "+jcapsPort
 print "Please edit the variables in the script if these defaults need to be changed."
 print '-------------------------------------------------------------------\n\n'
 
+
 server = AdminConfig.getid(serverURL)
 if server:
-    jmsproviderName = 'JCAPSJMSProvider'
-    #Remove any existing configuration of JCAPS queue provider.
-    print "Removing any existing JMS Provider"    
-    oldjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName)    
-    if oldjmsp:    
-        print "Deleting ", oldjmsp
-        AdminConfig.remove(oldjmsp);
-        AdminConfig.save();
-    
-    #Create a new JCAPS JMS Provider   
-    print "Creating JCAPS JMS Provider..." #AdminConfig.required('JMSProvider')    
-    iContextClass = "com.stc.jms.jndispi.InitialContextFactory"    
-    qMgrURL = "stcms://"+jcapsHost+":"+jcapsPort    
-    name = ['name', jmsproviderName]    
-    extICF = ['externalInitialContextFactory', iContextClass]    
-    extPURL = ['externalProviderURL', qMgrURL]    
-    jmspAttrs = [name, extICF, extPURL]    
-    print "Setting up JCAPS JMS provider with these attributes: \n\t", jmspAttrs    
-    newjmsp = AdminConfig.create('JMSProvider', server, jmspAttrs)    
-    
-    #Set the custom props    
-    #Since the newly created JMS provider does not have a custom property list, create a blank property set.
-    propSet = AdminConfig.create('J2EEResourcePropertySet', newjmsp, [])
-    
-    #Set the use name and password required to connect to JCAPS Q Manager.    
-    AdminConfig.create('J2EEResourceProperty', propSet, [['name', 'java.naming.security.principal'], ['value', jcapsUserID]])    
-    AdminConfig.create('J2EEResourceProperty', propSet, [['name', 'java.naming.security.credentials'], ['value', jcapsPwd]])    
-    AdminConfig.save()
-    print "Successfully set up JCAPS as a JMS provider.\n"
-    
-    #Create QCF
-    print "\nCreating Queue Connection Factory..."#,AdminConfig.attributes('GenericJMSConnectionFactory')
-    newjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName)
-    name = ['name', 'JMSTestQCF']
-    jndi = ['jndiName', 'jms/JMSTestQCF']
-    externaljndi = ['externalJNDIName', 'connectionfactories/queueconnectionfactory']
-    mqcfAttrs = [name, jndi, externaljndi]
-    print "Creating QCF with these configuration: \n\t", mqcfAttrs
-    AdminConfig.create('GenericJMSConnectionFactory', newjmsp, mqcfAttrs)
-    AdminConfig.save()
-    print "Queue Connection Factory created successfuly.\n"
-    
-     
-    #Create Queue
-    print "\nCreating Queue..."    
-    newjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName)    
-    qname = ['name', 'JMSTestQ']    
-    qjndi = ['jndiName', 'jms/JMSTestQ']    
-    qexternaljndi = ['externalJNDIName', 'queCSF']    
-    mqAttrs = [qname, qjndi, qexternaljndi]    
-    print "Creating Q with these configuration: \n\t", mqAttrs    
-    AdminConfig.create('GenericJMSDestination', newjmsp, mqAttrs)    
-    AdminConfig.save()    
-    print "Queue created successfuly.\n"
+	jmsproviderName = 'JCAPSJMSProvider'
+	#Remove any existing configuration of JCAPS queue provider.
+	print "Removing any existing JMS Provider"
+	oldjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName) 
+	
+	if oldjmsp:
+		print "Deleting ",oldjmsp
+		AdminConfig.remove(oldjmsp);
+		AdminConfig.save();
+	
+	#Create a new JCAPS JMS Provider
+	print "Creating JCAPS JMS Provider..." #AdminConfig.required('JMSProvider')
 
+	iContextClass = "com.stc.jms.jndispi.InitialContextFactory"
+	qMgrURL = "stcms://"+jcapsHost+":"+jcapsPort
+	name = ['name', jmsproviderName]
+	extICF = ['externalInitialContextFactory',  iContextClass] 
+	extPURL = ['externalProviderURL', qMgrURL] 
+	jmspAttrs = [name, extICF, extPURL]
+	
+	print "Setting up JCAPS JMS provider with these attributes: \n\t",jmspAttrs
+	newjmsp = AdminConfig.create('JMSProvider', server, jmspAttrs)
+
+	#Set the custom props
+	#Since the newly created JMS provider does not have a custom property list,
+	#create a blank property set.
+	propSet = AdminConfig.create('J2EEResourcePropertySet', newjmsp, [])
+
+	#Set the user name and password required to connect to JCAPS Q Manager.
+	AdminConfig.create('J2EEResourceProperty', propSet, [['name', 'java.naming.security.principal'], ['value', jcapsUserID]])
+	AdminConfig.create('J2EEResourceProperty', propSet, [['name', 'java.naming.security.credentials'], ['value', jcapsPwd]])
+	
+	AdminConfig.save()
+	print "Successfuly set up JCAPS as a JMS provider.\n"
+	
+	#Create QCF
+	print "\nCreating Queue Connection Factory..."#,AdminConfig.attributes('GenericJMSConnectionFactory')
+	newjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName) 
+	name = ['name', 'JMSAppenderQCF']
+	jndi = ['jndiName', 'jms/JMSAppenderQCF']
+	externaljndi = ['externalJNDIName', 'connectionfactories/queueconnectionfactory']
+	mqcfAttrs = [name, jndi, externaljndi]
+	print "Creating QCF with these configuration: \n\t",mqcfAttrs
+	qcf = AdminConfig.create('GenericJMSConnectionFactory', newjmsp, mqcfAttrs)
+
+	#Set some mandatory attributes
+	print AdminConfig.create('ConnectionPool', qcf, [], "connectionPool")
+	print AdminConfig.create('ConnectionPool', qcf, [], "sessionPool")
+	print AdminConfig.create("MappingModule",qcf,[["mappingConfigAlias","DefaultPrincipalMapping"],["authDataAlias",""]])
+	
+	AdminConfig.save()
+	print "Queue Connection Factory created successfuly.\n"
+	
+	#Create Queue
+	print "\nCreating Queue..."
+	newjmsp = AdminConfig.getid(serverURL+'/JMSProvider:'+jmsproviderName) 
+	qname = ['name', 'JMSAppenderQ']
+	qjndi = ['jndiName', 'jms/JMSAppenderQ']
+	qexternaljndi = ['externalJNDIName', 'queues/queCSF']
+	qtype = ["type","QUEUE"]
+	mqAttrs = [qname, qjndi, qexternaljndi, qtype]
+
+	print "Creating Q with these configuration: \n\t",mqAttrs	
+	AdminConfig.create('GenericJMSDestination', newjmsp, mqAttrs)
+	AdminConfig.save()
+	print "Queue created successfuly.\n"
 else:
-    print "Server not reachable or not configured correctly."
+	print "Server not reachable or not configured correctly."
 }}}
