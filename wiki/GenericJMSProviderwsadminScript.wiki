@@ -19,7 +19,7 @@ serverURL = '/Cell:'+cellName+'/Node:'+nodeName+'/Server:'+serverName
 #JCAPS Configuration related variables
 jcapsUserID = "Administrator"
 jcapsPwd = "STC"
-jcapsHost = "10.90.21.15"
+jcapsHost = "155.54.XX.99"
 jcapsPort = "18007"
 
 print '\n\n-------------------------------------------------------------------'
