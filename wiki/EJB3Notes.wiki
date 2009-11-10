@@ -34,15 +34,17 @@ spec document - {{ADD LINK}}
 
 
 ==Context==
-Bean Context = Its Container context + resource context + environment context.
-Some Dependency annotation - @EJB, @Resource
+  * Bean Context = Its Container context + resource context + environment context.
+  * Some Dependency annotation - @EJB, @Resource
 	Usage:
-	Option 1: {{{@EJB(name="mySessionBean", beanInterface=MySessionIF.class)}}}
-	Option 2: {{{@EJB //reference name and type inferred from variable
-		  public AddressHome addressHome;}}}
-
-Setter Injection: 
-
+	Option 1: {{{
+@EJB(name="mySessionBean", beanInterface=MySessionIF.class)
+}}}
+	Option 2: {{{
+@EJB //reference name and type inferred from variable
+		  public AddressHome addressHome;
+}}}
+  * Setter Injection: 
 	{{{
 	@Resource(name=”customerDB”)
 	public void setDataSource(DataSource myDB) {
@@ -50,9 +52,7 @@ Setter Injection:
 	}
 
 	}}}
-Lookups are performed via JNDI. HOW???? Add details
-
-
+  * Lookups are performed via JNDI. HOW???? Add details
 
 
 
