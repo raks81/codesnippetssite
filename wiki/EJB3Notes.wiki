@@ -1,8 +1,7 @@
-#summary One-sentence summary of this page.
-
+#summary Just some notes on EJB3 basics.
 = Introduction =
 
-Add your content here.
+The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means
 
 
 = Details =
