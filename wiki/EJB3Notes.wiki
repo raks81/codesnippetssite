@@ -9,7 +9,6 @@ The notes on EJB3 below can be used to refresh ones memory. It is not an extensi
 Session/Message Driven Beans:
 
 
-Context
-* Bean Context \= Its Container context + resource context + environment context.
-* Dependency annotation = @EJB(name="mySessionBean", beanInterface=MySessionIF.class)/@Resource(name="myDB", type=javax.sql.DataSource.class)
-* 
+==Context==
+Bean Context = Its Container context + resource context + environment context.
+Dependency annotation = @EJB(name="mySessionBean", beanInterface=MySessionIF.class)/@Resource(name="myDB", type=javax.sql.DataSource.class)
