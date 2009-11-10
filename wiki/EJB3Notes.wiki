@@ -13,7 +13,7 @@ The notes on EJB3 below can be used to refresh ones memory. It is not an extensi
   * What happens if not interface at all???? (Do all public methods of the class become the business methods??)
   * Cannot extend javax.ejb.EJBObject or javax.ejb.EJBLocalObject.
   * Business methods should not throw RemoteException.
-  * Methods marked @WebMethos are web services.
+  * Methods marked @WebMethod are web services.
   * In case of Stateful Session Bean a metod marked @Remove will remove the bean instance when called. eg: 
 {{{
 @Remove public void finishShopping() {
