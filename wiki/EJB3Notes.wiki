@@ -1,74 +1,3 @@
-Rajesh:
-------
-Requirements specs created?
-current tasks
-detailed Plan
-Daimler IT Stds documentation
-WAS license not working
-
-
-Terminology:
------------
-Veto
-CMC -- truck??
-Mild hybrid
-GR/PRQ
-Houston Process/HBSG
-
-
-
-
-EJB3
-PAI
-Jasper
-JPA
-OSGi
-LCA
-TSA
-JSF Facelets
-ICE Faces
-Pentaho
-toad
-
-
-
-
-Pentaho (http://www.pentaho.com/)
-Java/JRE
-IceFaces (http://www.icefaces.org)
-RAD
-Tortoise SVN (http://tortoisesvn.tigris.org/)
-DB2 Database Enterprise Server
-DB2 Database Client
-G++/gcc
-Jasper Reports/Jfree Chart Library
-putty
-Winscp telnet/FTP
-Trac (http://trac.edgewall.org/)
-virtual box
-Mysql workbench
-eclipse
-Text Pad
-Latex (http://www.latex-project.org/)
-perl
-python
-SUSE OS
-SVN (part of Linux OS)
-GIT (part of Linux OS)
-libgsl (part of Linux OS)
-libxml++ (part of Linux OS)
-Packages provided by suse OS 
-SSH 
-WAS
-cygwin
-Ferret Project URL access across Daimler (ULM/Stuttgart)
-
-
-
-
-
-
-
 #summary Just some notes on EJB3 basics.
 = Introduction =
 
@@ -121,8 +50,6 @@ Setter Injection:
 
 	}}}
 Lookups are performed via JNDI. HOW???? Add details
-
-
 
 
 
