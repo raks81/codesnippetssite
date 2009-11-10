@@ -1,12 +1,13 @@
 #summary Just some notes on EJB3 basics.
 = Introduction =
 
-The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means
+The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means. The information below is from the EJB 3 Simplified spec document - {{ADD LINK}}
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Session/Message Driven Beans:
+
+
+Context
+Bean Context = Its Container context + resource context + environment context
