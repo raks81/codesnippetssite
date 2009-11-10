@@ -16,10 +16,9 @@ What happens if not interface at all???? (Do all public methods of the class bec
 Cannot extend javax.ejb.EJBObject or javax.ejb.EJBLocalObject.
 Business methods should not throw RemoteException.
 Methods marked @WebMethos are web services.
-In case of Stateful Session Bean a metod marked @Remove will remove the bean instance when called. eg: {{{@Remove public void finishShopping() {
+In case of Stateful Session Bean a metod marked @Remove will remove the bean instance when called. eg: @Remove public void finishShopping() {
 ...
 }
-}}}
 
 ==Interceptors==
 Methods that intercept business method invocation (type1) and Lifecycle callback events(type2) are called Interceptors.
@@ -50,8 +49,6 @@ Setter Injection:
 
 	}}}
 Lookups are performed via JNDI. HOW???? Add details
-
-
 
 
 
