@@ -1,14 +1,138 @@
+Rajesh:
+------
+Requirements specs created?
+current tasks
+detailed Plan
+Daimler IT Stds documentation
+WAS license not working
+
+
+Terminology:
+-----------
+Veto
+CMC -- truck??
+Mild hybrid
+GR/PRQ
+Houston Process/HBSG
+
+
+
+
+EJB3
+PAI
+Jasper
+JPA
+OSGi
+LCA
+TSA
+JSF Facelets
+ICE Faces
+Pentaho
+toad
+
+
+
+
+Pentaho (http://www.pentaho.com/)
+Java/JRE
+IceFaces (http://www.icefaces.org)
+RAD
+Tortoise SVN (http://tortoisesvn.tigris.org/)
+DB2 Database Enterprise Server
+DB2 Database Client
+G++/gcc
+Jasper Reports/Jfree Chart Library
+putty
+Winscp telnet/FTP
+Trac (http://trac.edgewall.org/)
+virtual box
+Mysql workbench
+eclipse
+Text Pad
+Latex (http://www.latex-project.org/)
+perl
+python
+SUSE OS
+SVN (part of Linux OS)
+GIT (part of Linux OS)
+libgsl (part of Linux OS)
+libxml++ (part of Linux OS)
+Packages provided by suse OS 
+SSH 
+WAS
+cygwin
+Ferret Project URL access across Daimler (ULM/Stuttgart)
+
+
+
+
+
+
+
 #summary Just some notes on EJB3 basics.
 = Introduction =
 
-The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means. The information below is from the EJB 3 Simplified spec document - {{ADD LINK}}
+The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means. The information below is from the EJB 3 Simplified 
+
+spec document - {{ADD LINK}}
 
 
 = Details =
 
-Session/Message Driven Beans:
+==Session/Message Driven Beans==
+Marked using annotations @Stateless, @Sateful.
+If a enterprise bean implements one interface, the methods in that interface become the business methods
+If > 1 interfaces, the class or interfaces should be explicitly marked as @Remote or @Local as needed.
+What happens if not interface at all???? (Do all public methods of the class become the business methods??)
+Cannot extend javax.ejb.EJBObject or javax.ejb.EJBLocalObject.
+Business methods should not throw RemoteException.
+Methods marked @WebMethos are web services.
+In case of Stateful Session Bean a metod marked @Remove will remove the bean instance when called. eg: {{{@Remove public void finishShopping() {
+...
+}
+}}}
+
+==Interceptors==
+Methods that intercept business method invocation (type1) and Lifecycle callback events(type2) are called Interceptors.
+Interceptor methods can be defined in the bean itself or in separate "Interceptor Claases"
+Should have a public no arg constructor.
+Interceptors are "chained" per the order in which they are annoted.
+Type1 can throw application and runtime exceotions, Type2 can throw Runtime exceptions.
+Type1 can be @AroundInvoke (Similar to method around advice of AOP), Type2 can use @PostConstruct, @PreDestroy, @PostActivate and @PrePassivate (First 2 only 
+
+in case of SLSB and all 4 incase of SFSB)
 
 
 ==Context==
 Bean Context = Its Container context + resource context + environment context.
-Dependency annotation = @EJB(name="mySessionBean", beanInterface=MySessionIF.class)/@Resource(name="myDB", type=javax.sql.DataSource.class)
+Some Dependency annotation - @EJB, @Resource
+	Usage:
+	Option 1: {{{@EJB(name="mySessionBean", beanInterface=MySessionIF.class)}}}
+	Option 2: {{{@EJB //reference name and type inferred from variable
+		  public AddressHome addressHome;}}}
+
+Setter Injection: 
+
+	{{{
+	@Resource(name=”customerDB”)
+	public void setDataSource(DataSource myDB) {
+	this.ds = myDB;
+	}
+
+	}}}
+Lookups are performed via JNDI. HOW???? Add details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
