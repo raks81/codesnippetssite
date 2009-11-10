@@ -1,9 +1,7 @@
 #summary Just some notes on EJB3 basics.
 = Introduction =
 
-The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means. The information below is from the EJB 3 Simplified 
-
-spec document - {{ADD LINK}}
+The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means. The information below is from the [http://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_JCP-Site/en_US/-/USD/VerifyItem-Start/ejb-3_0-fr-spec-simplified.pdf?BundledLineItemUUID=HxNIBe.mTy8AAAEkfHpqSt3l&OrderID=WmxIBe.m.5sAAAEkZHpqSt3l&ProductID=xLnACUFBJWkAAAEY3AY5AXuU&FileName=/ejb-3_0-fr-spec-simplified.pdf EJB 3 Simplified spec document ]
 
 
 = Details =
@@ -55,6 +53,4 @@ spec document - {{ADD LINK}}
 
 	}}}
   * Lookups are performed via JNDI. HOW???? Add details
-
-
 
