@@ -37,10 +37,12 @@ spec document - {{ADD LINK}}
   * Bean Context = Its Container context + resource context + environment context.
   * Some Dependency annotation - @EJB, @Resource
 	Usage:
-	Option 1: {{{
+	Option 1: 
+{{{
 @EJB(name="mySessionBean", beanInterface=MySessionIF.class)
 }}}
-	Option 2: {{{
+	Option 2: 
+{{{
 @EJB //reference name and type inferred from variable
 		  public AddressHome addressHome;
 }}}
@@ -53,8 +55,6 @@ spec document - {{ADD LINK}}
 
 	}}}
   * Lookups are performed via JNDI. HOW???? Add details
-
-
 
 
 
