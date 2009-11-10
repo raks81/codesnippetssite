@@ -33,7 +33,7 @@ spec document - {{ADD LINK}}
   * Type1 can be @AroundInvoke (Similar to method around advice of AOP), Type2 can use @PostConstruct, @PreDestroy, @PostActivate and @PrePassivate (only the first 2 in case of SLSB and all 4 incase of SFSB)
 
 
-==Context==
+==Context of the EJB and looking it up==
   * Bean Context = Its Container context + resource context + environment context.
   * Some Dependency annotation - @EJB, @Resource
 	Usage:
@@ -55,8 +55,6 @@ spec document - {{ADD LINK}}
 
 	}}}
   * Lookups are performed via JNDI. HOW???? Add details
-
-
 
 
 
