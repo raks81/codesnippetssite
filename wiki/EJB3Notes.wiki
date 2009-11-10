@@ -9,7 +9,7 @@ The notes on EJB3 below can be used to refresh ones memory. It is not an extensi
 ==Session/Message Driven Beans==
   * Marked using annotations @Stateless, @Sateful.
   * If a enterprise bean implements one interface, the methods in that interface become the business methods.
-  * If > 1 interfaces, the class or interfaces should be explicitly marked as @Remote or @Local as needed.
+  * If > 1 interface, the class or interfaces should be explicitly marked as @Remote or @Local as needed.
   * What happens if not interface at all???? (Do all public methods of the class become the business methods??)
   * Cannot extend javax.ejb.EJBObject or javax.ejb.EJBLocalObject.
   * Business methods should not throw RemoteException.
@@ -53,4 +53,3 @@ The notes on EJB3 below can be used to refresh ones memory. It is not an extensi
 
 	}}}
   * Lookups are performed via JNDI. HOW???? Add details
-
