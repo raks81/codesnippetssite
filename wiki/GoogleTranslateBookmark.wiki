@@ -10,3 +10,10 @@ Create a new bookmark and paste the code below as the URL field in the "Web Docu
 {{{
 javascript:document.location.href="http://translate.google.co.in/translate?prev=hp&hl=en&js=y&u="+escape(document.location.href);
 }}}
+
+
+This bookmark will pop a prompt box where a word can be entered and then page will be loaded with the Google Translate page for that word.
+
+{{{
+javascript:document.location.href="http://translate.google.co.in/translate_t?hl=en&ie=UTF-8&text="+prompt("Enter the word you want to translate","")+"&tl=en#"
+}}}
