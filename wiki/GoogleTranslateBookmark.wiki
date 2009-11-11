@@ -1,7 +1,7 @@
 #summary A simple javascript bookmark that will translate the current web page using Google Translate.
 = Introduction =
 
-A simple javascript bookmark that will translate the current web page using Google Translate. The language is detected automatically by google.
+A simple javascript bookmark that will translate the current web page using Google Translate. The language is detected automatically by google. This has been tested only in IE 6 as of this writing. I am not sure how it would behave if the source URL is already escaped.
 
 
 = Details =
