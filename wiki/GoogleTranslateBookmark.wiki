@@ -12,8 +12,8 @@ javascript:document.location.href="http://translate.google.co.in/translate?prev=
 }}}
 
 
-This bookmark will pop a prompt box where a word can be entered and then page will be loaded with the Google Translate page for that word.
+This bookmark will pop a prompt box where a word can be entered and then page will be loaded with the Google Translate page for that word. Change the "sl" parameter to the code of the source language. In the snippet below it is es=spanish.
 
 {{{
-javascript:document.location.href="http://translate.google.co.in/translate_t?hl=en&ie=UTF-8&text="+prompt("Enter the word you want to translate","")+"&tl=en#"
+javascript:document.location.href="http://translate.google.co.in/translate_t?hl=en&ie=UTF-8&text="+prompt("Enter the word you want to translate","")+"&sl=es&tl=en#"
 }}}
