@@ -1,0 +1,12 @@
+#summary A simple javascript bookmark that will translate the current web page using Google Translate.
+= Introduction =
+
+A simple javascript bookmark that will translate the current web page using Google Translate. The language is detected automatically by google.
+
+
+= Details =
+Create a new bookmark and paste the code below as the URL field in the "Web Document" tab.
+
+{{{
+javascript:document.location.href="http://translate.google.co.in/translate?prev=hp&hl=en&js=y&u="+escape(document.location.href);
+}}}
