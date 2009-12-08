@@ -24,3 +24,10 @@ You can use other command line arguments for the profile template that were list
 *Note that all command line arguments are case sensitive*
 
 You obviously need to replace the absolute paths in the commands (/opt/IBM/WebSphere/AppServer) above with the installation directory of your WebSphere.
+
+Command to augment a profile is pretty similar. In the command below the newly created profile (AppSrv02) will be augmented with EJB3 fixpack for WAS 6.1:
+
+{{{
+manageprofiles.sh -augment -profileName AppSrv02 -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/EJB3/default.ejb3fep
+}}}
+
