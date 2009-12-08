@@ -1,0 +1,24 @@
+#summary Usage of the manageprofiles.sh to create profiles
+
+= Introduction =
+
+This little article explains how a new WebSphere profile can be created using the commandline manageprofile.sh script that is available in /opt/IBM/WebSphere/AppServer/bin folder. This is needed if you are working in a Unix environment and dont have a X system available. 
+
+
+= Details =
+The most basic flavor is to create a new profile with default settings. To get the help on default template use this command:
+
+{{{
+>./manageprofiles.sh -create -help -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/default
+}}}
+
+To create a new profile use this command:
+
+{{{
+>./manageprofiles.sh -create -templatePath opt/IBM/WebSphere/AppServer/profileTemplates/default 
+-profileName AppSrv02 -profilePath /opt/IBM/WebSphere/AppServer/profiles/AppSrv02
+}}}
+
+You can use other command line arguments for the profile template that were listed in the output of help command above.
+
+*Note that all command line arguments are case sensitive*
