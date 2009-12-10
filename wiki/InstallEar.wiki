@@ -13,6 +13,8 @@ Disclaimer:
 The code was tested while installing WAR file only and NOT with EAR. May need some changes in the way context-root is handled for it to work with EAR.
 This code was written to be run in development environment and not meant for production usage (although with some exception handling and parametrization it can be). 
 
+Check this link for information on how to run this script:
+http://code.google.com/p/codesnippetssite/wiki/BasicWebSphereAdminwsadmin
 
 = Details =
 {{{
