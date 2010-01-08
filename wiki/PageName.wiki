@@ -7,7 +7,8 @@ This is a simple eclipse plugin I wrote to that provides "Explore" option in ecl
 
 = Details =
 
-Steps to use (developer way):
-Checkout the project from svn (Location...).
-import it into eclipse/RAD.
-Export it as "Deployable plug-in and Fragment
+* Steps to use (developer way):
+* Checkout the project from svn (Location...).
+* import it into eclipse/RAD.
+* Export it as "Deployable plug-in and Fragment.
+* Copy the exported Jar file to c:\eclipse\plugins or IBM\SDP70\plugins or a similar folder.
