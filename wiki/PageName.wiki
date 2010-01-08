@@ -1,0 +1,13 @@
+#summary Yet another explorer plugin for eclipse.
+
+= Introduction =
+
+This is a simple eclipse plugin I wrote to that provides "Explore" option in eclipse explorer views like Navigator, Package explorer etc. The question is there are so many plugins out there that do the same thing why this one? Well, I use Rational Application Developer and seems like with every minor updates to RAD the plugins that are out there break. Nothing against the plugin itself as most of them are written for eclipse and not RAD. So with this I can import the project, make any changes needed for that version of eclipse/RAD, test it and then use it.
+
+
+= Details =
+
+Steps to use (developer way):
+Checkout the project from svn (Location...).
+import it into eclipse/RAD.
+Export it as "Deployable plug-in and Fragment
