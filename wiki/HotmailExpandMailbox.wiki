@@ -1,13 +1,19 @@
-#summary One-sentence summary of this page.
+#Greasemonkey script to expand the mailbox width
 
 = Introduction =
 
-Add your content here.
-
+This is a simple greasemonkey script to extend the width of the mailbox pane of windows live mail
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{
+
+// ==UserScript==
+// @name           expand
+// @namespace      http://code.google.com/p/codesnippetssite/w/edit/HotmailExpandMailbox
+// @include        http://sn121w.snt121.mail.live.com/default.aspx?rru=inbox
+// ==/UserScript==
+
+window.setTimeout(function() { document.getElementById('UIFrame').contentWindow.document.getElementById('MainContent').style.right = '0px'; }, 2000);
+
+}}}
