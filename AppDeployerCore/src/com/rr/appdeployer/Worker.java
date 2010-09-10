@@ -21,6 +21,7 @@ public class Worker implements Runnable {
     String serverName;
     Properties props = new Properties();
     private static final String SVN_UPDATE_COMMAND = "svn update ";
+    private static final String BUILD_EAR_COMMAND = "ant";
 
     public Worker(String branchName, String serverName) throws IOException {
         log.info("Creating new worker to build branch: " + branchName + " and deploy to App server running on port " + serverName);
@@ -43,17 +44,16 @@ public class Worker implements Runnable {
         //String svnUpdateCommand = SVN_UPDATE_COMMAND + branchPath;
         log.info("Performing svn update on " + branchPath + " by running:\n" + SVN_UPDATE_COMMAND);
         String op = ProcessRunner.executeProcess(SVN_UPDATE_COMMAND, new File(branchPath), System.out);
-        log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + op);
-
-        //Go to EAR
-        
+        log.info("SVN update completed successfully");
 
         //Build the EAR
-
-
-
+        String earPath = branchPath+"/EAR";
+        log.info("Building EAR");
+        ProcessRunner.executeProcess(BUILD_EAR_COMMAND, new File(earPath), System.out);
+        log.info("EAR built successfully");
+        
         //Load the app server properties
-
+        
 
         //Deploy the EAR
     }
