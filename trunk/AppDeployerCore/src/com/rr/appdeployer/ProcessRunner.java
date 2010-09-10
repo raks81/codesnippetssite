@@ -50,7 +50,7 @@ class ProcessOutputReader implements Runnable {
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = input.readLine()) != null) {
                 System.out.println("-----------"+line);
-                output.append(line + "\n");
+                output.append(line).append("\n");
             }
             input.close();
         } catch (IOException ex) {
