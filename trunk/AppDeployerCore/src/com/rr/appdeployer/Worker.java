@@ -39,12 +39,12 @@ public class Worker implements Runnable {
         //Go to the path where code is  checked out
         String branchPath = props.getProperty("branches." + branchName + ".path");
 
-        String svnUpdateCommand = SVN_UPDATE_COMMAND +branchPath + "/*";
+        String svnUpdateCommand = SVN_UPDATE_COMMAND +branchPath;
         log.info("Performing svn update on " + branchPath + " by running:\n" + svnUpdateCommand);
         //Perform SVN Update
-        StringBuffer output = new StringBuffer();
-        ProcessRunner.executeProcess(svnUpdateCommand);
-        log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + output);
+        
+        String op = ProcessRunner.executeProcess(svnUpdateCommand);
+        log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + op);
 
         //Go to EAR
 
