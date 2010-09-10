@@ -13,8 +13,7 @@ import java.io.InputStreamReader;
  */
 public class ProcessRunner { 
 
-    public static String executeProcess(String path) {
-        StringBuffer output = new StringBuffer();
+    public static String executeProcess(String path, StringBuffer output) {
         try {
             String line;
             Process p = Runtime.getRuntime().exec(path);
