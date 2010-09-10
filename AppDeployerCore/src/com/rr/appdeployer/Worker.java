@@ -43,7 +43,7 @@ public class Worker implements Runnable {
         log.info("Performing svn update on " + branchPath + " by running:\n" + svnUpdateCommand);
         //Perform SVN Update
         StringBuffer output = new StringBuffer();
-        ProcessRunner.executeProcess(svnUpdateCommand, output);
+        ProcessRunner.executeProcess(svnUpdateCommand);
         log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + output);
 
         //Go to EAR
