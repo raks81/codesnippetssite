@@ -20,10 +20,11 @@ public class ProcessRunner {
             Process p = Runtime.getRuntime().exec(path);
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
+            while ((line = input.readLine()) != null ) {
                 output.append(line + "\n");
             }
             input.close();
+            p.waitFor();
             if (p.exitValue() != 0) {
                 throw new RuntimeException("Process execution failed. Process returned exit value: " + p.exitValue() + " \n The standard output is\n" + output.toString());
             }

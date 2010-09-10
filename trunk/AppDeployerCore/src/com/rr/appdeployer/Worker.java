@@ -1,7 +1,10 @@
 package com.rr.appdeployer;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /*
  * To change this template, choose Tools | Templates
@@ -13,31 +16,35 @@ import java.util.Properties;
  */
 public class Worker implements Runnable {
 
+    private static final Logger log = Logger.getLogger(Worker.class.getName());
     String branchName;
     String serverName;
     Properties props = new Properties();
-    private static final String SVN_UPDATE_COMMAND = "svn update *";
+    private static final String SVN_UPDATE_COMMAND = "svn update ";
 
     public Worker(String branchName, String serverName) throws IOException {
+        log.info("Creating new worker to build branch: " + branchName + " and deploy to App server running on port " + serverName);
         this.branchName = branchName;
         this.serverName = serverName;
 
+        String propFilePath = System.getProperty("user.dir")+"/appdeployer.props";
+        log.info("Loading properties from "+propFilePath);
         //Load the props file
-        props = new java.util.Properties();
-        String path = getClass().getProtectionDomain().getCodeSource().
-                getLocation().toString().substring(6);
-        java.io.FileInputStream fis = new java.io.FileInputStream(new java.io.File(path + "/appdeployer.props"));
-        props.load(fis);
-        fis.close();
+        props.load(new FileInputStream(propFilePath));
+        log.info("Instantiated new worker");
 
     }
 
     public void run() {
+        log.info("Starting the task");
         //Go to the path where code is  checked out
-        String branchPath = props.getProperty(branchName + ".path");
+        String branchPath = props.getProperty("branches." + branchName + ".path");
+
+        String svnUpdateCommand = SVN_UPDATE_COMMAND +branchPath + "/*";
+        log.info("Performing svn update on " + branchPath + " by running:\n" + svnUpdateCommand);
         //Perform SVN Update
-        String op = ProcessRunner.executeProcess(branchPath + "/" + SVN_UPDATE_COMMAND);
-        System.out.println("Output of "+SVN_UPDATE_COMMAND+"\n"+op);
+        String op = ProcessRunner.executeProcess(svnUpdateCommand);
+        log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + op);
 
         //Go to EAR
 
