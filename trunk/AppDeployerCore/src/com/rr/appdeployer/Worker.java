@@ -1,5 +1,6 @@
 package com.rr.appdeployer;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -26,8 +27,8 @@ public class Worker implements Runnable {
         this.branchName = branchName;
         this.serverName = serverName;
 
-        String propFilePath = System.getProperty("user.dir")+"/appdeployer.props";
-        log.info("Loading properties from "+propFilePath);
+        String propFilePath = System.getProperty("user.dir") + "/appdeployer.props";
+        log.info("Loading properties from " + propFilePath);
         //Load the props file
         props.load(new FileInputStream(propFilePath));
         log.info("Instantiated new worker");
@@ -36,17 +37,16 @@ public class Worker implements Runnable {
 
     public void run() {
         log.info("Starting the task");
-        //Go to the path where code is  checked out
-        String branchPath = props.getProperty("branches." + branchName + ".path");
-
-        String svnUpdateCommand = SVN_UPDATE_COMMAND +branchPath;
-        log.info("Performing svn update on " + branchPath + " by running:\n" + svnUpdateCommand);
+                
         //Perform SVN Update
-        
-        String op = ProcessRunner.executeProcess(svnUpdateCommand);
+        String branchPath = props.getProperty("branches." + branchName + ".path");
+        //String svnUpdateCommand = SVN_UPDATE_COMMAND + branchPath;
+        log.info("Performing svn update on " + branchPath + " by running:\n" + SVN_UPDATE_COMMAND);
+        String op = ProcessRunner.executeProcess(SVN_UPDATE_COMMAND, new File(branchPath));
         log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + op);
 
         //Go to EAR
+        
 
         //Build the EAR
 

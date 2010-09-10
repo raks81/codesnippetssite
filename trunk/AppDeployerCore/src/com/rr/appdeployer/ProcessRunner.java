@@ -5,6 +5,7 @@
 package com.rr.appdeployer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
@@ -16,11 +17,16 @@ import java.util.logging.Logger;
  */
 public class ProcessRunner {
 
-    public static String executeProcess(String path) {
+    public static String executeProcess(String command, File workingDir) {
         StringBuffer output = new StringBuffer();
         try {
 
-            Process p = Runtime.getRuntime().exec(path);
+            Process p;
+            if (workingDir == null) {
+                p = Runtime.getRuntime().exec(command);
+            } else {
+                p = Runtime.getRuntime().exec(command, null, workingDir);
+            }
             Thread t = new Thread(new ProcessOutputReader(p, output));
             t.start();
             p.waitFor();
