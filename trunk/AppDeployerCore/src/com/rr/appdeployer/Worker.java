@@ -2,7 +2,6 @@ package com.rr.appdeployer;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -43,8 +42,9 @@ public class Worker implements Runnable {
         String svnUpdateCommand = SVN_UPDATE_COMMAND +branchPath + "/*";
         log.info("Performing svn update on " + branchPath + " by running:\n" + svnUpdateCommand);
         //Perform SVN Update
-        String op = ProcessRunner.executeProcess(svnUpdateCommand);
-        log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + op);
+        StringBuffer output = new StringBuffer();
+        ProcessRunner.executeProcess(svnUpdateCommand, output);
+        log.info("Output of " + SVN_UPDATE_COMMAND + "\n" + output);
 
         //Go to EAR
 
