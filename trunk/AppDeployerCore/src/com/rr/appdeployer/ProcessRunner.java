@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +18,9 @@ import java.util.logging.Logger;
  */
 public class ProcessRunner {
 
-    public static String executeProcess(String command, File workingDir) {
-        StringBuffer output = new StringBuffer();
+    public static String executeProcess(String command, File workingDir, OutputStream output) {
+
+        StringBuffer sbf = new StringBuffer();
         try {
 
             Process p;
@@ -27,7 +29,7 @@ public class ProcessRunner {
             } else {
                 p = Runtime.getRuntime().exec(command, null, workingDir);
             }
-            Thread t = new Thread(new ProcessOutputReader(p, output));
+            Thread t = new Thread(new ProcessOutputReader(p, output, sbf));
             t.start();
             p.waitFor();
             if (p.exitValue() != 0) {
@@ -36,18 +38,20 @@ public class ProcessRunner {
         } catch (Exception err) {
             err.printStackTrace();
         }
-        return output.toString();
+        return sbf.toString();
     }
 }
 
 class ProcessOutputReader implements Runnable {
 
     Process p;
-    StringBuffer output;
+    OutputStream output;
+    StringBuffer sbf;
 
-    public ProcessOutputReader(Process p, StringBuffer output) {
+    public ProcessOutputReader(Process p, OutputStream output, StringBuffer sbf) {
         this.p = p;
         this.output = output;
+        this.sbf = sbf;
     }
 
     public void run() {
@@ -55,7 +59,11 @@ class ProcessOutputReader implements Runnable {
             String line;
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = input.readLine()) != null) {
-                output.append(line).append("\n");
+                if (output != null) {
+                    output.write(line.getBytes());
+                    output.write("\n".getBytes());
+                }
+                sbf.append(line).append("\n");
             }
             input.close();
         } catch (IOException ex) {
