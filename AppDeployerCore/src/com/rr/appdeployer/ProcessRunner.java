@@ -35,8 +35,10 @@ public class ProcessRunner {
             if (p.exitValue() != 0) {
                 throw new RuntimeException("Process execution failed. Process returned exit value: " + p.exitValue() + " \n The standard output is\n" + output.toString());
             }
-        } catch (Exception err) {
-            err.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException("IOException while running process", e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException("InterruptedException while running process", e);
         }
         return sbf.toString();
     }
