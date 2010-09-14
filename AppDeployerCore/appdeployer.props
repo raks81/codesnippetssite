@@ -1,1 +1,14 @@
-branches.trunk.path=/home/raks/test/AppDeployerCore/
+#SVN properties
+branches.trunk.path=/opt/Ferret/build/trunk
+branches.gui_controller.path=/opt/Ferret/build/branches/gui_controller
+
+#Websphere properties
+appserver.9081.cell=SRTIDEV001Node02Cell
+appserver.9081.node=SRTIDEV001Node02
+appserver.9081.server=server1
+appserver.9081.path=/opt/IBM/WebSphere/AppServer/profiles/AppSrv01
+appserver.9081.username=admin
+appserver.9081.password=Admin123
+
+#Webpshere install EAR script location
+appserver.installear.path=/opt/Ferret/scripts/installEar.py
