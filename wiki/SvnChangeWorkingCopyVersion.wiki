@@ -13,7 +13,7 @@ python change-svn-wc-format.py . 1.5
 
 = Details =
 
-{{{
+
 #!/usr/bin/env python
 #
 # change-svn-wc-format.py: Change the format of a Subversion working copy.
@@ -433,5 +433,3 @@ def main():
 
 if __name__ == "__main__":
   main()
-
-}}}
