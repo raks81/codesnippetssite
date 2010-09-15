@@ -11,7 +11,7 @@ This one is not a code snippet, but just some basic wsadmin commands used to con
 ===Starting admin app:===
 {{{
 >cd D:\Program Files\IBM\SDP70\runtimes\base_v61\profiles\AppSrv01\bin
->wsadmin.bat
+>wsadmin.bat -username admin -password admin
 }}}
 ===Install WAR:===
 {{{
@@ -35,4 +35,10 @@ $AdminApp uninstall appName
 {{{
 cd D:\Program Files\IBM\SDP70\runtimes\base_v61\profiles\AppSrv01\bin
 >wsadmin.bat -lang jython -f c:/installApp.py [script-params]
+}}}
+
+===Getting heapdump of Websphere server===
+{{{
+wsadmin>set objectName [$AdminControl queryNames WebSphere:type=JVM,process=<server_name>,node=<node_name>,*]
+wsadmin>$AdminControl invoke $objectName generateHeapDump
 }}}
