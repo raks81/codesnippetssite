@@ -42,6 +42,8 @@ $AdminApp uninstall appName
 ===Running a Jython wasadmin script===
 {{{
 cd D:\Program Files\IBM\SDP70\runtimes\base_v61\profiles\AppSrv01\bin
+}}}
+{{{
 >wsadmin.bat -lang jython -f c:/installApp.py [script-params]
 }}}
 
