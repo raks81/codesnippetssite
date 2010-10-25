@@ -7,11 +7,19 @@ Some basic DB2 admin commands
 
 ===To monitor the database all the monitor switches need to be turned ON at the dbm=== (Instance level)
 db2inst2@srtidev001:~/sqllib/db2dump> db2 get dbm cfg|grep DFT_MON
+
    Buffer pool                         (DFT_MON_BUFPOOL) = ON
+
    Lock                                   (DFT_MON_LOCK) = ON
+
    Sort                                   (DFT_MON_SORT) = ON
+
    Statement                              (DFT_MON_STMT) = ON
+
    Table                                 (DFT_MON_TABLE) = ON
+
    Timestamp                         (DFT_MON_TIMESTAMP) = ON
+
    Unit of work                            (DFT_MON_UOW) = ON
+
 Db2 update dbm cfg using DFT_MON_BUFPOOL ON/OFF DFT_MON_LOCK ON/OFF
