@@ -59,10 +59,8 @@ db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
 }}}
 
 
-
-
-
-To view the diag log file for detail information of the database
+===To view the diag log file for detail information of the database===
 The diag file will have all the information regarding Load, Locks, Deadlocks etc.
 It is present in the following folder
 /home/db2inst2/sqllib/db2dump/db2diag.log
+
