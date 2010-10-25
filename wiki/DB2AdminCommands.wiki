@@ -72,7 +72,7 @@ db2 "list applications show detail"|grep -i lock
 
   * 2 Take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
 {{{
-db2 "get snapshot for locks on ferret"|less
+db2 "get snapshot for locks on dbname"|less
 }}}
 	Search for 24183 in this, it will tell you the application that is holding the lock
 {{{
