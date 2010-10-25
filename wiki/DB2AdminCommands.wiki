@@ -1,0 +1,8 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Some basic DB2 admin commands
+
+
+== Details ==
