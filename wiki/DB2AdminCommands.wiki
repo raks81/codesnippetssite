@@ -65,15 +65,17 @@ It is present in the following folder
 
 
 ===To find and kill locks===
-  * Find the locks in the db:
-	db2 "list applications show detail"|grep -i lock
+  # Find the locks in the db
+{{{
+db2 "list applications show detail"|grep -i lock
+}}}
 
-2) take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
-	db2 "get snapshot for locks on ferret"|less
-	Search for 24183 in this, it wil tell you the application that is holding the lock
-Eg:
-
-
+  # Take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
+{{{
+db2 "get snapshot for locks on ferret"|less
+}}}
+	Search for 24183 in this, it will tell you the application that is holding the lock
+{{{
 Application handle                         = 24183
 Application ID                             = 53.59.133.104.49244.10082306373
 Sequence number                            = 05262
@@ -93,12 +95,12 @@ Total wait time (ms)                       = 142927
   Lock object type                         = Row
   Lock mode                                = Exclusive Lock (X)
   Lock mode requested                      = Next Key Share (NS)
-  Name of tablespace holding lock          = DATASPACE1
-  Schema of table holding lock             = VETO
-  Name of table holding lock               = T_VHCF
+  Name of tablespace holding lock          = DATASPACE
+  Schema of table holding lock             = SCHEMA
+  Name of table holding lock               = TABLE
   Data Partition Id of table holding lock  = 0
   Lock wait start timestamp                = 2010-08-27 10.54.31.786436
-
+}}}
 	
 
 3) Check what 30518 is doing 
