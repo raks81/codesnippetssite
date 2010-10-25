@@ -62,3 +62,48 @@ db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
 The diag file will have all the information regarding Load, Locks, Deadlocks etc.
 It is present in the following folder
 /home/db2inst2/sqllib/db2dump/db2diag.log
+
+
+===To find and kill locks===
+  * Find the locks in the db:
+	db2 "list applications show detail"|grep -i lock
+
+2) take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
+	db2 "get snapshot for locks on ferret"|less
+	Search for 24183 in this, it wil tell you the application that is holding the lock
+Eg:
+
+
+Application handle                         = 24183
+Application ID                             = 53.59.133.104.49244.10082306373
+Sequence number                            = 05262
+Application name                           = java
+CONNECT Authorization ID                   = DB2INST1
+Application status                         = Lock-wait
+Status change time                         = 2010-08-27 10.54.31.786436
+Application code page                      = 1208
+Locks held                                 = 66
+Total wait time (ms)                       = 142927
+
+  ID of agent holding lock                 = 30518
+  Application ID holding lock              = 53.59.165.30.43527.100827083409
+  Lock name                                = 0x0300C1002F0040140000000052
+  Lock attributes                          = 0x00000000
+  Release flags                            = 0x00020000
+  Lock object type                         = Row
+  Lock mode                                = Exclusive Lock (X)
+  Lock mode requested                      = Next Key Share (NS)
+  Name of tablespace holding lock          = DATASPACE1
+  Schema of table holding lock             = VETO
+  Name of table holding lock               = T_VHCF
+  Data Partition Id of table holding lock  = 0
+  Lock wait start timestamp                = 2010-08-27 10.54.31.786436
+
+	
+
+3) Check what 30518 is doing 
+	db2 "get snapshot for application agentid 30518"|less
+	At the very end of this, it will show what query it is executing (Also has all the detail (user id/ip address of requestor etc)
+
+4) Kill this application by running this:
+	db2 "force application (30518)"
