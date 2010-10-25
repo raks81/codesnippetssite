@@ -40,20 +40,23 @@ db2 autoconfigure apply none
 
 
 
-To view the DB size
+===To view the DB siz===
+{{{
 db2 connect to dev
 db2 “CALL GET_DBSIZE_INFO(?, ?, ?, -1)”
+}}}
 
-
-To view all the active connections to the database
+===To view all the active connections to the database===
+{{{
 db2 list applications show detail
+}}}
 
-
-To view the explain plan and to generate the db2 advisory tool
+===To view the explain plan and to generate the db2 advisory tool===
 Create the Explain tables for which the script EXPLAIN.DDL is located in ~/sqllib/misc folder
-
+{{{
 db2expln -database DEV -output query.sql.out -stmtfile query.sql -terminator ";"  -graph
 db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
+}}}
 
 
 
