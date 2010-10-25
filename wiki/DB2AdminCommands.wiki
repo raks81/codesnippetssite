@@ -20,3 +20,46 @@ Some basic DB2 admin commands
 
 > db2 update dbm cfg using DFT_MON_BUFPOOL ON/OFF DFT_MON_LOCK ON/OFF
 }}}
+
+===To check the bufferpool hit ratio===
+{{{
+db2pd –db dev –bufferpool
+}}}
+
+
+===To view the dbm and db cfg parameters===
+{{{
+db2 get dbm cfg
+db2 get db cfg for dev
+}}}
+
+===To view the suggested parameters making use of autoconfigure utility===
+{{{
+db2 autoconfigure apply none
+}}}
+
+
+
+To view the DB size
+db2 connect to dev
+db2 “CALL GET_DBSIZE_INFO(?, ?, ?, -1)”
+
+
+To view all the active connections to the database
+db2 list applications show detail
+
+
+To view the explain plan and to generate the db2 advisory tool
+Create the Explain tables for which the script EXPLAIN.DDL is located in ~/sqllib/misc folder
+
+db2expln -database DEV -output query.sql.out -stmtfile query.sql -terminator ";"  -graph
+db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
+
+
+
+
+
+To view the diag log file for detail information of the database
+The diag file will have all the information regarding Load, Locks, Deadlocks etc.
+It is present in the following folder
+/home/db2inst2/sqllib/db2dump/db2diag.log
