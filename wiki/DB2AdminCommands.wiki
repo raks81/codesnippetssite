@@ -6,10 +6,9 @@ Some basic DB2 admin commands
 
 
 ===To monitor the database all the monitor switches need to be turned ON at the dbm===
-
-(Instance level)
-> db2 get dbm cfg|grep DFT_MON
 {{{
+> db2 get dbm cfg|grep DFT_MON
+
    Buffer pool                         (DFT_MON_BUFPOOL) = ON
    Lock                                   (DFT_MON_LOCK) = ON
    Sort                                   (DFT_MON_SORT) = ON
@@ -63,4 +62,3 @@ db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
 The diag file will have all the information regarding Load, Locks, Deadlocks etc.
 It is present in the following folder
 /home/db2inst2/sqllib/db2dump/db2diag.log
-
