@@ -5,8 +5,10 @@
 Some basic DB2 admin commands
 
 
-===To monitor the database all the monitor switches need to be turned ON at the dbm=== (Instance level)
-db2inst2@srtidev001:~/sqllib/db2dump> db2 get dbm cfg|grep DFT_MON
+===To monitor the database all the monitor switches need to be turned ON at the dbm===
+
+(Instance level)
+> db2 get dbm cfg|grep DFT_MON
 
    Buffer pool                         (DFT_MON_BUFPOOL) = ON
 
