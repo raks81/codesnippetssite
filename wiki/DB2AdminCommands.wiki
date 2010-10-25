@@ -65,12 +65,12 @@ It is present in the following folder
 
 
 ===To find and kill locks===
-  # Find the locks in the db
+  * 1 Find the locks in the db
 {{{
 db2 "list applications show detail"|grep -i lock
 }}}
 
-  # Take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
+  * 2 Take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
 {{{
 db2 "get snapshot for locks on ferret"|less
 }}}
@@ -103,9 +103,13 @@ Total wait time (ms)                       = 142927
 }}}
 	
 
-3) Check what 30518 is doing 
+  * 3 Check what 30518 is doing:
+{{{
 	db2 "get snapshot for application agentid 30518"|less
+}}}
 	At the very end of this, it will show what query it is executing (Also has all the detail (user id/ip address of requestor etc)
 
-4) Kill this application by running this:
+  * 4 Kill this application by running this:
+{{{
 	db2 "force application (30518)"
+}}}
