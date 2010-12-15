@@ -59,3 +59,9 @@ wsadmin>$AdminControl invoke $objectName generateHeapDump
 {{{
 wsadmin>$AdminTask exportWasprofile {-archive appsrv01_profile.car}
 }}}
+
+
+{{{
+wsadmin>$AdminTask importWasprofile {-archive appsrv01_profile.car}
+wsadmin>$AdminConfig save
+}}}
