@@ -54,3 +54,8 @@ wsadmin>set objectName [$AdminControl queryNames WebSphere:type=JVM,process=<ser
 {{{
 wsadmin>$AdminControl invoke $objectName generateHeapDump
 }}}
+
+===Exporting WebSphere profile configuration as CAR File===
+{{{
+wsadmin>$AdminTask exportWasprofile {-archive appsrv01_profile.car}
+}}}
