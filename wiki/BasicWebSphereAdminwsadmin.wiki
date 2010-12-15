@@ -60,7 +60,7 @@ wsadmin>$AdminControl invoke $objectName generateHeapDump
 wsadmin>$AdminTask exportWasprofile {-archive appsrv01_profile.car}
 }}}
 
-
+===Exporting WebSphere profile configuration from a CAR File===
 {{{
 wsadmin>$AdminTask importWasprofile {-archive appsrv01_profile.car}
 wsadmin>$AdminConfig save
