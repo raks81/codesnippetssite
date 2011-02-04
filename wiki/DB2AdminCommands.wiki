@@ -53,6 +53,8 @@ db2 list applications show detail
 Create the Explain tables for which the script EXPLAIN.DDL is located in ~/sqllib/misc folder
 {{{
 db2expln -database DEV -output query.sql.out -stmtfile query.sql -terminator ";"  -graph
+
+db2advis -d dev -o advis.out -s "query..." -t 5 > full_advis.out
 db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
 }}}
 
