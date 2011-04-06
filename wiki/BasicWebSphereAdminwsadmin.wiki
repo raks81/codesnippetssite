@@ -62,6 +62,7 @@ wsadmin>$AdminTask exportWasprofile {-archive appsrv01_profile.car}
 
 ===Importing WebSphere profile configuration from a CAR File===
 {{{
+>sftp user@servername:/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/appsrv01_profile.car .
 wsadmin>$AdminTask importWasprofile {-archive appsrv01_profile.car}
 wsadmin>$AdminConfig save
 }}}
