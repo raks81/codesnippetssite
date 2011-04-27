@@ -70,6 +70,9 @@ wsadmin>$AdminConfig save
 ===Finding and cancelling EJB Timer===
 {{{
 /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin> findEJBTimers.sh server1 -all
+}}}
+Output:
+{{{
 ADMU0116I: Tool information is being logged in file
            /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/server1/EJBTimers.log
 ADMU0128I: Starting tool with the AppSrv01 profile
@@ -86,9 +89,12 @@ Password:                                                                       
 
 }}}
 
-
+Use the timer id from the output (EJB Timer : 2552) and issue this command to cancel the timer.
 {{{
 /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin> cancelEJBTimers.sh server1 -timer 2552
+}}}
+Output:
+{{{
 ADMU0116I: Tool information is being logged in file
            /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/server1/EJBTimers.log
 ADMU0128I: Starting tool with the AppSrv01 profile
