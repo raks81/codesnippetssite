@@ -66,3 +66,41 @@ wsadmin>$AdminTask exportWasprofile {-archive appsrv01_profile.car}
 wsadmin>$AdminTask importWasprofile {-archive appsrv01_profile.car}
 wsadmin>$AdminConfig save
 }}}
+
+===Finding and cancelling EJB Timer===
+{{{
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin> findEJBTimers.sh server1 -all
+ADMU0116I: Tool information is being logged in file
+           /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/server1/EJBTimers.log
+ADMU0128I: Starting tool with the AppSrv01 profile
+ADMU3100I: Reading configuration for server: server1
+Xlib: connection to "localhost:10.0" refused by server
+Xlib: PuTTY X11 proxy: MIT-MAGIC-COOKIE-1 data did not match
+Realm/Cell Name: <default>
+Username: admin
+Password:                                                                                                                                                 EJB Timer : 2552     Expiration: 4/27/11 11:31 AM     Repeating
+   EJB    : EAR, Business.jar, SchedulerServiceEJB
+   EJB Key: Not Available
+   Info   : SchedulerData@4bc84bc8[...]
+1 EJB Timer tasks found
+
+}}}
+
+
+{{{
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin> cancelEJBTimers.sh server1 -timer 2552
+ADMU0116I: Tool information is being logged in file
+           /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/server1/EJBTimers.log
+ADMU0128I: Starting tool with the AppSrv01 profile
+ADMU3100I: Reading configuration for server: server1
+Xlib: connection to "localhost:10.0" refused by server
+Xlib: PuTTY X11 proxy: MIT-MAGIC-COOKIE-1 data did not match
+Realm/Cell Name: <default>
+Username: admin
+Password:                                                                                                                                                 EJB Timer : 2552     Expiration: 4/27/11 11:31 AM     Repeating
+   EJB    : EAR, Business.jar, SchedulerServiceEJB
+   EJB Key: Not Available
+   Info   : SchedulerData@4d1d4d1d[...]
+1 EJB Timer tasks cancelled
+
+}}}
