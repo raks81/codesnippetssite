@@ -1,3 +1,4 @@
+#labels BasicExcelMacro,SearchForTermInExcelMacro,FolderSelectionDialogExcelMacro
 #Basic Microsoft Excel Macro
 
 = Introduction =
@@ -9,6 +10,10 @@ This was a macro I wrote to read the cells in Excel workbook, search for a parti
   * Search for a term in an Excel sheet via macro
   * Open a folder selection dialog box via macro
   * Save text from macro into an external flat file
+
+I did copy most of the code from other code snippets which I googled. Especially the folder selection dialog which is NOT my code.
+
+The code below perhaps violated a lot of best practices of writing a macro but it gets the job done :-)
 
 = Details =
 
