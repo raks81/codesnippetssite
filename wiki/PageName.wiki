@@ -27,7 +27,7 @@ Sub saveSQLScriptsToFile()
     
     MyPath = SelectFolder("Select Folder Where SQL Files Will be stored", "")
     If Len(MyPath) Then
-        sFile = MyPath & "\ferret_stammdaten_standard.sql"
+        sFile = MyPath & "\somefile.txt"
     Else
         MsgBox "Cancel was pressed"
         Exit Sub
@@ -68,7 +68,6 @@ Sub saveSQLScriptsToFile()
     Open sFile For Output As iFileNum
     Print #iFileNum, sqlStr
     Close #iFileNum
-    MsgBox "SQLs Generated and stored successfully." & vbCrLf & vbCrLf & "If SQLs are not generated correctly: " & vbCrLf & " - Make sure every sheet has the coulmn 'SQL (AUTO-GENERATED)' in it." & vbCrLf & " - Make sure there are no empty columns before 'SQL (AUTO-GENERATED)'" & vbCrLf & " - Make sure all the SQL statements are continuous, i.e. there are no blank rows in between." & vbCrLf & "If you still get errors contact rakshith.rao@daimler.com"
 End Sub
 
 
