@@ -1,0 +1,97 @@
+Basic Microsoft Excel Macro
+
+= Introduction =
+
+This was a macro I wrote to read the cells in Excel workbook, search for a particular term and perform an action when a match is found. The macro has code in it that can be used to:
+  * Navigate through multiple sheets of an Excel workbook
+  * Navigate through cells of a sheet in workbook
+  * String concatenation in Excel macro
+  * Search for a term in an Excel sheet via macro
+  * Open a folder selection dialog box via macro
+  * Save text from macro into an external flat file
+
+I did copy most of the code from other code snippets which I googled. Especially the folder selection dialog which is NOT my code.
+
+The code below perhaps violated a lot of best practices of writing a macro but it gets the job done :-)
+
+= Details =
+
+{{{
+
+Sub saveSQLScriptsToFile()
+    Dim ws As Worksheet
+    Dim x As String
+    Dim found As Boolean
+    Dim sqlStr As String
+    Dim MyRange As Range
+    Dim sFile As String
+    Dim sText As String
+    Dim iFileNum As Integer
+    Dim MyPath As String
+    
+    MyPath = SelectFolder("Select Folder Where SQL Files Will be stored", "")
+    If Len(MyPath) Then
+        sFile = MyPath & "\somefile.txt"
+    Else
+        MsgBox "Cancel was pressed"
+        Exit Sub
+    End If
+    
+    
+    iFileNum = FreeFile
+    
+    For Each ws In ActiveWorkbook.Sheets
+        With ws
+            x = "SQL (AUTO-GENERATED)"
+            found = False
+            sqlStr = sqlStr & "-- " & ws.Name & vbCrLf
+            ' Set Do loop to stop at empty cell.
+            For Each c In ws.Cells
+                 If c.Value = x Or c.Value = "" Then
+                   found = True
+                   ' MsgBox "Found in " & ws.Name
+                   If c.Value = x Then
+                        ' MsgBox c.Column
+                        Set MyRange = ws.Range(c, ws.Cells(65000, c.Column))
+                        For Each c1 In MyRange
+                            If (c1.Column = c.Column And c1.Row <> c.Row) Then
+                                sqlStr = sqlStr & c1.Value & vbCrLf
+                            End If
+                            If c1.Value = "" Then
+                                Exit For
+                            End If
+                        Next
+                   End If
+                   Exit For
+                End If
+            Next
+        End With
+    Next ws
+    
+    
+    Open sFile For Output As iFileNum
+    Print #iFileNum, sqlStr
+    Close #iFileNum
+End Sub
+
+
+' VBA select folder relies upon the Microsoft Shell Controls And Automation object library.
+' You will need to set a Reference to it.
+' In the VBA Editor's Tools menu, click References... scroll down
+' to "Microsoft Shell Controls And Automation" and choose it. We have to add it to be able to use the
+Function SelectFolder(Optional Title As String, Optional TopFolder _
+                         As String) As String
+    Dim objShell As New Shell32.Shell
+    Dim objFolder As Shell32.Folder
+
+    'If you use 16384 instead of 1 on the next line,
+    'files are also displayed
+    Set objFolder = objShell.BrowseForFolder _
+                            (0, Title, 1, TopFolder)
+    If Not objFolder Is Nothing Then
+        SelectFolder = objFolder.Self.Path
+    End If
+End Function
+
+
+}}}
