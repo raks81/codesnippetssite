@@ -6,3 +6,15 @@ Steps to create a new DB2 Database from scratch
 
 
 = Details =
+  # Step 1: Create users and groups
+{{{
+groupadd db2i1grp
+groupadd db2fcgrp
+groupadd db2asgrp
+
+useradd -g db2i1grp -m -d /home.local/db2inst1 db2inst1
+useradd -g db2fcgrp -m -d /home.local/db2fc db2fc
+useradd -g db2asgrp -m -d /home.local/db2as db2as
+}}}
+
+  
