@@ -65,3 +65,45 @@ UPDATE DBM CFG USING
     INTRA_PARALLEL NO
 ;
 }}}
+
+Step 8: Start Database
+{{{
+db2start
+}}}
+
+Step 9: Create Database
+{{{
+CREATE DATABASE MYDB
+    AUTOMATIC STORAGE NO
+    ON /opt/data/db2db/db2inst1
+    USING CODESET UTF-8 TERRITORY DE
+    COLLATE USING SYSTEM_923_DE
+    PAGESIZE 8 K
+    DFT_EXTENT_SZ 32
+    RESTRICTIVE
+    CATALOG TABLESPACE
+        MANAGED BY DATABASE USING
+        (
+            FILE '/opt/data/db2db/db2inst1/MYDB/syscatspace' 8192
+        )
+        EXTENTSIZE 4 PREFETCHSIZE 4
+        NO FILE SYSTEM CACHING
+        AUTORESIZE YES INCREASESIZE 96 M MAXSIZE NONE        
+    USER TABLESPACE
+        MANAGED BY DATABASE USING
+        (
+            FILE '/opt/data/db2db/db2inst1/MYDB/userspace1' 8192
+        )
+        EXTENTSIZE 32 PREFETCHSIZE 32
+        NO FILE SYSTEM CACHING
+        AUTORESIZE YES INCREASESIZE 96 M MAXSIZE NONE            
+    TEMPORARY TABLESPACE
+        MANAGED BY SYSTEM USING
+        (
+            '/opt/data/db2db/db2inst1/MYDB/tempspace1'
+        )
+        EXTENTSIZE 32 PREFETCHSIZE 32
+        NO FILE SYSTEM CACHING
+;
+
+}}}
