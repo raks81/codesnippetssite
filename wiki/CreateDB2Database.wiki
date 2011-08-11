@@ -169,7 +169,7 @@ TERMINATE;
 Step : Create Buffer Pools
 
 {{{
-CONNECT TO ferret;
+CONNECT TO MYDB;
 
 ALTER BUFFERPOOL IBMDEFAULTBP
     SIZE 262144 AUTOMATIC
@@ -186,7 +186,7 @@ TERMINATE;
 Step : Create Table Spaces
 
 {{{
-CONNECT TO ferret;
+CONNECT TO MYDB;
 
 ALTER TABLESPACE TEMPSPACE1
     BUFFERPOOL TEMPBP
@@ -201,7 +201,7 @@ CREATE LARGE TABLESPACE DATASPACE1
     PAGESIZE 8 K
     MANAGED BY DATABASE USING
         (
-            FILE '/opt/data/db2db/db2inst1/ferret/dataspace1' 6291456
+            FILE '/opt/data/db2db/db2inst1/MYDB/dataspace1' 6291456
         )
         EXTENTSIZE 112 PREFETCHSIZE AUTOMATIC
         AUTORESIZE YES INCREASESIZE 12 G MAXSIZE NONE            
@@ -213,7 +213,7 @@ CREATE LARGE TABLESPACE INDEXSPACE1
     PAGESIZE 8 K
     MANAGED BY DATABASE USING
         (
-            FILE '/opt/data/db2db/db2inst1/ferret/indexspace1' 3145728
+            FILE '/opt/data/db2db/db2inst1/MYDB/indexspace1' 3145728
         )
         EXTENTSIZE 112 PREFETCHSIZE AUTOMATIC
         AUTORESIZE YES INCREASESIZE 6 G MAXSIZE NONE            
@@ -225,7 +225,7 @@ CREATE LARGE TABLESPACE ADMINSPACE1
     PAGESIZE 8 K
     MANAGED BY DATABASE USING
         (
-            FILE '/opt/data/db2db/db2inst1/ferret/adminspace1' 2097152
+            FILE '/opt/data/db2db/db2inst1/MYDB/adminspace1' 2097152
         )
         EXTENTSIZE 112 PREFETCHSIZE AUTOMATIC
         AUTORESIZE YES INCREASESIZE 2 G MAXSIZE NONE            
