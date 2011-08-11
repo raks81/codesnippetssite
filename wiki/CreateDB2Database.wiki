@@ -17,4 +17,12 @@ useradd -g db2fcgrp -m -d /home.local/db2fc db2fc
 useradd -g db2asgrp -m -d /home.local/db2as db2as
 }}}
 
-  
+  # Step 2: Create DB admin server
+{{{
+/opt/ibm/db2/V9.7/instance/dascrt -u db2as
+}}}
+
+  # Strep 3: Create instance
+{{{
+/opt/ibm/db2/V9.7/instance/db2icrt -u db2fc db2inst1
+}}}
