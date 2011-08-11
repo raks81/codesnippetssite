@@ -1,4 +1,4 @@
-#Steps to create a new DB2 Database from scratch
+#summary Steps to create a new DB2 Database from scratch
 
 = Introduction =
 
