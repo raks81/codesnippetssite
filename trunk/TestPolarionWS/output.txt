@@ -1,9 +1,9 @@
-20120429 09:43:	CREATE: Created ticket in trac 1 for polarion id PLC-285
-20120429 09:43:	CREATE: Added comment to 1 while creating.
-20120429 09:43:	UPDATE: Updated attributes of trac ticket 1 from polarion id PLC-285
-20120429 09:43:	CREATE: Created ticket in trac 2 for polarion id SBV-2417
-20120429 09:43:	CREATE: Added comment to 2 while creating.
-20120429 09:43:	UPDATE: Updated attributes of trac ticket 2 from polarion id SBV-2417
-20120429 09:43:	CREATE: Created ticket in trac 3 for polarion id SBV-5877
-20120429 09:43:	CREATE: Added comment to 3 while creating.
-20120429 09:43:	UPDATE: Updated attributes of trac ticket 3 from polarion id SBV-5877
+20120429 10:01:	CREATE: Created ticket in trac 1 for polarion id PLC-285
+20120429 10:01:	CREATE: Added comment to 1 while creating.
+20120429 10:01:	UPDATE: Updated attributes of trac ticket 1 from polarion id PLC-285
+20120429 10:01:	CREATE: Created ticket in trac 2 for polarion id SBV-2417
+20120429 10:01:	CREATE: Added comment to 2 while creating.
+20120429 10:01:	UPDATE: Updated attributes of trac ticket 2 from polarion id SBV-2417
+20120429 10:01:	CREATE: Created ticket in trac 3 for polarion id SBV-5877
+20120429 10:01:	CREATE: Added comment to 3 while creating.
+20120429 10:01:	UPDATE: Updated attributes of trac ticket 3 from polarion id SBV-5877
