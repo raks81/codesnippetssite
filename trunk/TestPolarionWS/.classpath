@@ -4,8 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/wsclient.jar"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
-	<classpathentry kind="lib" path="lib/axis-patch.jar"/>
-	<classpathentry kind="lib" path="lib/axis.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-discovery-0.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
@@ -19,5 +17,8 @@
 	<classpathentry kind="lib" path="lib/xmlrpc-common-3.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/xmlrpc-server-3.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/org.lustin.trac_xml_rpc.jar"/>
+	<classpathentry kind="lib" path="lib/axis.jar"/>
+	<classpathentry kind="lib" path="lib/axis-patch.jar"/>
+	<classpathentry kind="lib" path="lib/com.tasktop.polarion.core_2.3.0.v20120323-0600.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
