@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +21,12 @@ import java.util.ListIterator;
 import java.util.Properties;
 import java.util.Vector;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.xml.rpc.ServiceException;
 
 import org.apache.xmlrpc.client.XmlRpcClient;
@@ -53,6 +61,14 @@ public class PolarionToTrac {
 		fw = new FileWriter(new File("output.txt"));
 	}
 
+	// always verify the host - dont check for certificate
+	final static HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
+	        public boolean verify(String hostname, SSLSession session) {
+	                return true;
+	        }
+	};
+
+	
 	/**
 	 * @param args
 	 * @throws IOException
@@ -102,6 +118,8 @@ public class PolarionToTrac {
 	public List<WorkItem> importWIs() throws Exception {
 		// prepare to import
 		try {
+			trustAllHosts();
+			
 			setUpPolarionAddress();
 
 			setUpPolarionWebServices();
@@ -312,7 +330,44 @@ public class PolarionToTrac {
 		sessionService = factory.getSessionService();
 		trackerService = factory.getTrackerService();
 		projectService = factory.getProjectService();
+		
 	}
+	
+	/**
+     * Trust every server - dont check for any certificate
+     */
+    private static void trustAllHosts() {
+				System.setProperty("javax.net.ssl.trustStore", "C:\\\\Program Files\\ibm\\WebSphere\\AppServer\\java\\jre\\lib\\security\\cacerts");
+				System.setProperty("javax.net.ssl.keyStorePassword", "changeit");
+				
+				System.out.println(new File(System.getProperty("javax.net.ssl.trustStore")).getAbsolutePath());
+				
+              // Create a trust manager that does not validate certificate chains
+              TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+                      public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                              return new java.security.cert.X509Certificate[] {};
+                      }
+
+                      public void checkClientTrusted(X509Certificate[] chain,
+                                      String authType) throws CertificateException {
+                      }
+
+                      public void checkServerTrusted(X509Certificate[] chain,
+                                      String authType) throws CertificateException {
+                      }
+              } };
+
+              // Install the all-trusting trust manager
+              try {
+                      SSLContext sc = SSLContext.getInstance("SSL");
+                      sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                      HttpsURLConnection
+                                      .setDefaultSSLSocketFactory(sc.getSocketFactory());
+              } catch (Exception e) {
+                      e.printStackTrace();
+              }
+      }
+
 
 	private String getTracEquivalent(String polarinVal) {
 		if (prop.getProperty(polarinVal.replaceAll(" ", "_")) == null
