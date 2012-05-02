@@ -336,9 +336,9 @@ public class PolarionToTrac {
 	/**
      * Trust every server - dont check for any certificate
      */
-    private static void trustAllHosts() {
-				System.setProperty("javax.net.ssl.trustStore", "C:\\\\Program Files\\ibm\\WebSphere\\AppServer\\java\\jre\\lib\\security\\cacerts");
-				System.setProperty("javax.net.ssl.keyStorePassword", "changeit");
+    private void trustAllHosts() {
+				System.setProperty("javax.net.ssl.trustStore", prop.getProperty("keystore_location"));
+				System.setProperty("javax.net.ssl.keyStorePassword", prop.getProperty("keystore_password"));
 				
 				System.out.println(new File(System.getProperty("javax.net.ssl.trustStore")).getAbsolutePath());
 				
