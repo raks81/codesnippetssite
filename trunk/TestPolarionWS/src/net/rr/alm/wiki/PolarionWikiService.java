@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import net.rr.alm.polarion.PolarionUtils;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -28,6 +26,10 @@ public class PolarionWikiService implements IWikiService {
 
 	private static final Logger LOG = Logger
 			.getLogger(PolarionWikiService.class.getName());
+
+	private static final String WIKI_HTML_DIRECTIVE_START = "{{{ \n#!html \n";
+
+	private static final String WIKI_HTML_DIRECTIVE_END = "\n }}}";
 
 	private Properties prop = new Properties();
 
@@ -55,6 +57,7 @@ public class PolarionWikiService implements IWikiService {
 	@Override
 	public WikiPage getWikiPage(String name) {
 		WikiPage wikiPage = null;
+		LOG.info("Getting page " + name + " from polarion...");
 		try {
 			logIn(prop.getProperty("user"), prop.getProperty("passwd"));
 			// https://vumstm002.rd.corpintra.net:8001/polarion/wiki/bin/view/project/plattformentwicklung/page/HowTo/Database%20Configuration
@@ -65,7 +68,7 @@ public class PolarionWikiService implements IWikiService {
 			HttpResponse response = httpclient.execute(get);
 
 			wikiPage = processResponse(response);
-			wikiPage.setPageName(name);
+			wikiPage.setPageName(name.replaceAll("/", "_"));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -85,11 +88,13 @@ public class PolarionWikiService implements IWikiService {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			response.getEntity().writeTo(bos);
 			wikiPage.setRawContents(bos.toString("UTF-8"));
-			wikiPage.setWikiMarkup(StringUtils.substringBeforeLast(
-					StringUtils
-							.substringAfter(wikiPage.getRawContents(),
-									"<div id=\"mainlayoutsubsection\" class=\"main layoutsubsection\">"),
-					"</body>"));
+			wikiPage.setWikiMarkup(WIKI_HTML_DIRECTIVE_START
+					+ "\n"
+					+ StringUtils.substringBeforeLast(
+							StringUtils
+									.substringAfter(wikiPage.getRawContents(),
+											"<div id=\"mainlayoutsubsection\" class=\"main layoutsubsection\">"),
+							"</body>") + WIKI_HTML_DIRECTIVE_END);
 		} else {
 			throw new RuntimeException(
 					"Error getting WikiPage - Unexpected respose status: "

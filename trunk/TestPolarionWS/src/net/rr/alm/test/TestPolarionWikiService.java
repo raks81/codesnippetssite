@@ -20,5 +20,7 @@ public class TestPolarionWikiService {
 	public void testSingleWikiPageFetch() {
 		WikiPage page = wikiService.getWikiPage("HowTo/FERRET Work Item HowTo");
 		System.out.println(page.getWikiMarkup());
+
 	}
+
 }
