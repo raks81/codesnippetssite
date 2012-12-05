@@ -24,7 +24,7 @@ public class WikiPage {
 	}
 
 	public String getPageName() {
-		return pageName;
+		return pageName != null ? pageName.replaceAll(" ", "") : "";
 	}
 
 	public void setPageName(String pageName) {
