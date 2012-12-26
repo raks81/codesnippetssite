@@ -1,0 +1,17 @@
+#Home for simple(and complex) shell scripts.
+
+= Introduction =
+
+This page will be a place holder for shell that I create/come across and find helpful.
+
+
+= Details =
+{{{
+for file in $(find . -iname "*.ZIP"); do 
+ unzip -l $file|grep -f tofind.txt > /dev/null ; 
+ res=$? ;
+ if [ $res -eq 0 ] ; then 
+  echo $file ; 
+ fi ; 
+done
+}}}
