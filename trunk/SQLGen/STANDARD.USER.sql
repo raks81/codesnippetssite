@@ -1,0 +1,1 @@
+INSERT INTO STANDARD.USER (DEPARTMENT, LAST_NAME, FPC, LOGIN, LOCKED, FIRST_NAME, PASSWORD, EMAIL, COMPANY, PHONE) VALUES ('', 'Admin', 0, 'admin', 0, 'Admin', 'GMge3qSupmyrsEgvTk/nIw==', 'admin@dave.com', '', '' );

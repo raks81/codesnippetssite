@@ -1,0 +1,10 @@
+#
+#Fri Dec 28 14:04:54 IST 2012
+outputfile=busmon.sql
+rowfilters=net.rr.sqlgen.filter.ColumnTransformFilter
+password=db2inst1
+url=jdbc\:db2\://srtia052\:50000/FERRET
+table=USER
+schema=STANDARD
+=1
+username=db2inst1
