@@ -12,7 +12,7 @@ public class TestExpenseParser {
 
 	@Test
 	public void testSimpleExpense() {
-		String expString = "~Kadle kai - 10~";
+		String expString = "Kadle kai - 10";
 		Expense expense = TrackExpenseUtils.convertToExpense(expString);
 		Assert.assertTrue(expense != null);
 		Assert.assertTrue(expense.getSpentOn() != null);
@@ -26,7 +26,7 @@ public class TestExpenseParser {
 
 	@Test
 	public void testDecimalAmount() {
-		String expString = "~Kadle kai - 10.34~";
+		String expString = "Kadle kai - 10.34";
 		Expense expense = TrackExpenseUtils.convertToExpense(expString);
 		Assert.assertTrue(expense != null);
 		Assert.assertTrue(expense.getSpentOn() != null);
@@ -41,7 +41,7 @@ public class TestExpenseParser {
 
 	@Test
 	public void testMissingSpace() {
-		String expString = "~Kadle kai- 10.34~";
+		String expString = "Kadle kai- 10.34";
 		Expense expense = TrackExpenseUtils.convertToExpense(expString);
 		Assert.assertTrue(expense != null);
 		Assert.assertTrue(expense.getSpentOn() != null);
@@ -56,7 +56,7 @@ public class TestExpenseParser {
 
 	@Test
 	public void testNoSpaceAmount() {
-		String expString = "~Kadlekai-10.34~";
+		String expString = "Kadlekai-10.34";
 		Expense expense = TrackExpenseUtils.convertToExpense(expString);
 		Assert.assertTrue(expense != null);
 		Assert.assertTrue(expense.getSpentOn() != null);
@@ -69,16 +69,10 @@ public class TestExpenseParser {
 				.compareTo(new BigDecimal("10.34")) == 0);
 	}
 
-	@Test
-	public void testMissingDelimiter() {
-		String expString = "~Kadle kai - 10.34";
-		Expense expense = TrackExpenseUtils.convertToExpense(expString);
-		Assert.assertTrue(expense == null);
-	}
 	
 	@Test
 	public void testEmailBody() {
-		String expString = "~Kadlekai-10.34~";
+		String expString = "Kadlekai-10.34";
 		Expense expense = TrackExpenseUtils.convertToExpense(expString);
 		Assert.assertTrue(expense != null);
 		Assert.assertTrue(expense.getSpentOn() != null);
