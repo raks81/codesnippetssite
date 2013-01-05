@@ -1,14 +1,12 @@
 package com.rr.trackexpense.util;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import javax.mail.MessagingException;
+import java.util.logging.Logger;
 
 import org.datanucleus.util.StringUtils;
 
@@ -16,6 +14,9 @@ import com.rr.trackexpense.TrackexpenseDAO;
 import com.rr.trackexpense.model.Expense;
 
 public class TrackExpenseUtils {
+	private static Logger log = Logger.getLogger(TrackExpenseUtils.class
+			.getName());
+
 	public static List<Expense> convertToExpense(List<String> strExpenses) {
 		List<Expense> expenses = new ArrayList<Expense>();
 		for (String sExpense : strExpenses) {
@@ -31,22 +32,21 @@ public class TrackExpenseUtils {
 	public static Expense convertToExpense(String sExpense) {
 		// Should be in this format:
 		// ~Expense - 100~
-		if (sExpense != null && sExpense.contains("~")) {
+		if (sExpense != null) {
 			sExpense = sExpense.trim();
 			try {
-				sExpense = sExpense.substring(sExpense.indexOf("~") + 1,
-						sExpense.lastIndexOf("~"));
+//				sExpense = sExpense.substring(sExpense.indexOf("~") + 1,
+//						sExpense.lastIndexOf("~"));
 				if (sExpense != null) {
-
 					Date defaultTime = Calendar.getInstance().getTime();
-
 					return new Expense(sExpense.substring(0,
 							sExpense.lastIndexOf("-")).trim(), defaultTime,
 							new BigDecimal(sExpense.substring(
 									sExpense.lastIndexOf("-") + 1).trim()));
 				}
 			} catch (Exception e) {
-				System.out.println("Could not parse: " + sExpense);
+				log.severe("Could not parse: " + sExpense + "\n"
+						+ e.getMessage());
 			}
 		}
 		return null;

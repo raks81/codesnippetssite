@@ -2,6 +2,7 @@ package com.rr.trackexpense;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -17,6 +18,10 @@ import com.rr.trackexpense.util.TrackExpenseUtils;
 
 @SuppressWarnings("serial")
 public class TrackexpenseEmailServlet extends HttpServlet {
+
+	private static Logger log = Logger.getLogger(TrackexpenseEmailServlet.class
+			.getName());
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -26,7 +31,7 @@ public class TrackexpenseEmailServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
+		log.info("Received email for adding expense...");
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		try {
@@ -34,13 +39,15 @@ public class TrackexpenseEmailServlet extends HttpServlet {
 			String expensesString = "";
 			if (!StringUtils.isEmpty(message.getSubject())) {
 				expensesString = message.getSubject() + "\n";
+			} else {
+				expensesString += message.getContent().toString();
+				log.info("Email message: " + expensesString);
 			}
-			expensesString += message.getContent().toString();
 
 			TrackExpenseUtils.processExpenseAddRequest(expensesString);
 
 		} catch (MessagingException e) {
-			System.out.println("Error: " + e.getMessage());
+			log.severe("Error: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
