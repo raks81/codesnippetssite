@@ -1,12 +1,16 @@
 package com.rr.trackexpense;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.KeyRange;
+import com.google.appengine.api.datastore.Query;
 import com.rr.trackexpense.model.Expense;
 
 public class TrackexpenseDAO {
@@ -29,5 +33,25 @@ public class TrackexpenseDAO {
 				storeExpense(expense);
 			}
 		}
+	}
+
+	public List<Expense> getExpenses() {
+
+		List<Expense> expenses = new ArrayList<Expense>();
+		// Store the entity
+		DatastoreService datastore = DatastoreServiceFactory
+				.getDatastoreService();
+		Query query = new Query("expense");
+		List<Entity> fetchedExpenses = datastore.prepare(query).asList(
+				FetchOptions.Builder.withLimit(5));
+
+		if (fetchedExpenses != null) {
+			for (Entity fetchedExpense : fetchedExpenses) {
+				expenses.add(new Expense(fetchedExpense.getProperty("spentOn"),
+						fetchedExpense.getProperty("spentDate"), fetchedExpense
+								.getProperty("amount")));
+			}
+		}
+		return expenses;
 	}
 }
