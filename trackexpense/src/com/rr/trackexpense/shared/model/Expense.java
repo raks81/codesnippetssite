@@ -1,12 +1,17 @@
-package com.rr.trackexpense.model;
+package com.rr.trackexpense.shared.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Expense {
+public class Expense implements Serializable {
 	private Date spentDate;
 	private String spentOn;
 	private BigDecimal amount;
+
+	public Expense() {
+
+	}
 
 	public Expense(String spentOn, Date spentDate, BigDecimal amount) {
 		this.spentOn = spentOn;

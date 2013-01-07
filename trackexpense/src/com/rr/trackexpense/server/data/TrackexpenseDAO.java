@@ -1,6 +1,8 @@
-package com.rr.trackexpense;
+package com.rr.trackexpense.server.data;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -8,10 +10,9 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.KeyRange;
 import com.google.appengine.api.datastore.Query;
-import com.rr.trackexpense.model.Expense;
+import com.rr.trackexpense.shared.model.Expense;
 
 public class TrackexpenseDAO {
 	public void storeExpense(Expense expense) {
@@ -47,9 +48,10 @@ public class TrackexpenseDAO {
 
 		if (fetchedExpenses != null) {
 			for (Entity fetchedExpense : fetchedExpenses) {
-				expenses.add(new Expense(fetchedExpense.getProperty("spentOn"),
-						fetchedExpense.getProperty("spentDate"), fetchedExpense
-								.getProperty("amount")));
+				expenses.add(new Expense((String) fetchedExpense
+						.getProperty("spentOn"), (Date) fetchedExpense
+						.getProperty("spentDate"), new BigDecimal(
+						(Double) fetchedExpense.getProperty("amount"))));
 			}
 		}
 		return expenses;

@@ -1,4 +1,4 @@
-package com.rr.trackexpense.util;
+package com.rr.trackexpense.server.util;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 
 import org.datanucleus.util.StringUtils;
 
-import com.rr.trackexpense.TrackexpenseDAO;
-import com.rr.trackexpense.model.Expense;
+import com.rr.trackexpense.server.data.TrackexpenseDAO;
+import com.rr.trackexpense.shared.model.Expense;
 
 public class TrackExpenseUtils {
 	private static Logger log = Logger.getLogger(TrackExpenseUtils.class

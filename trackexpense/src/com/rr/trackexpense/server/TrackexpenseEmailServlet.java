@@ -1,4 +1,4 @@
-package com.rr.trackexpense;
+package com.rr.trackexpense.server;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.datanucleus.util.StringUtils;
 
-import com.rr.trackexpense.util.TrackExpenseUtils;
+import com.rr.trackexpense.server.util.TrackExpenseUtils;
 
 @SuppressWarnings("serial")
 public class TrackexpenseEmailServlet extends HttpServlet {
