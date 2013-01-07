@@ -2,6 +2,7 @@ package com.rr.trackexpense.server.data;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,17 +11,20 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyRange;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.rr.trackexpense.shared.model.Expense;
 
 public class TrackexpenseDAO {
+
+	private static long ID = Calendar.getInstance().getTimeInMillis();
+
 	public void storeExpense(Expense expense) {
 		// Store the entity
 		DatastoreService datastore = DatastoreServiceFactory
 				.getDatastoreService();
-		KeyRange keys = datastore.allocateIds("expense", 1);
-		Key expenseId = keys.iterator().next();
+		// KeyRange keys = datastore.allocateIds("expense", 1);
+		Key expenseId = KeyFactory.createKey("expense", ++ID);
 		Entity expenseEntity = new Entity("expense", expenseId);
 		expenseEntity.setProperty("amount", expense.getAmount().doubleValue());
 		expenseEntity.setProperty("spentOn", expense.getSpentOn());
@@ -44,7 +48,7 @@ public class TrackexpenseDAO {
 				.getDatastoreService();
 		Query query = new Query("expense");
 		List<Entity> fetchedExpenses = datastore.prepare(query).asList(
-				FetchOptions.Builder.withLimit(5));
+				FetchOptions.Builder.withDefaults());
 
 		if (fetchedExpenses != null) {
 			for (Entity fetchedExpense : fetchedExpenses) {

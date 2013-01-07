@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.rr.trackexpense.client.service.TrackExpenseClientImpl;
 import com.rr.trackexpense.shared.model.Expense;
@@ -42,16 +41,21 @@ public class TrackExpenseGUI extends Composite {
 			Grid grid = new Grid(expenses.size(), 3);
 
 			// Add images to the grid
+
+			Double total = 0d;
 			int numRows = grid.getRowCount();
-			for (int row = 0; row < numRows; row++) {
-				grid.setWidget(row, 0,
-						new Label(expenses.get(row).getSpentOn()));
+			int row = 0;
+			for (; row < numRows; row++) {
+				total += expenses.get(row).getAmount().doubleValue();
 				grid.setWidget(row, 1, new Label(expenses.get(row)
 						.getSpentDate().toString()));
+				grid.setWidget(row, 0,
+						new Label(expenses.get(row).getSpentOn()));
 				grid.setWidget(row, 2, new Label(expenses.get(row).getAmount()
 						.toString()));
 			}
 			vPanel.add(grid);
+			vPanel.add(new Label("Total: " + total.toString()));
 		}
 	}
 }
