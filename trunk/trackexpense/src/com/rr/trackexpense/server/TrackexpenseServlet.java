@@ -1,12 +1,14 @@
-package com.rr.trackexpense;
+package com.rr.trackexpense.server;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.rr.trackexpense.util.TrackExpenseUtils;
+import com.rr.trackexpense.server.util.TrackExpenseUtils;
 
 @SuppressWarnings("serial")
 public class TrackexpenseServlet extends HttpServlet {
