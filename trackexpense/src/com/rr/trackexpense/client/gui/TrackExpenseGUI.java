@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -47,9 +48,12 @@ public class TrackExpenseGUI extends Composite {
 			int row = 0;
 			for (; row < numRows; row++) {
 				total += expenses.get(row).getAmount().doubleValue();
-				grid.setWidget(row, 1, new Label(expenses.get(row)
-						.getSpentDate().toString()));
-				grid.setWidget(row, 0,
+				grid.setWidget(
+						row,
+						0,
+						new Label(DateTimeFormat.getShortDateFormat().format(
+								expenses.get(row).getSpentDate())));
+				grid.setWidget(row, 1,
 						new Label(expenses.get(row).getSpentOn()));
 				grid.setWidget(row, 2, new Label(expenses.get(row).getAmount()
 						.toString()));
