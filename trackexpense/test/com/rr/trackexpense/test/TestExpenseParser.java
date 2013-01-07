@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.rr.trackexpense.model.Expense;
-import com.rr.trackexpense.util.TrackExpenseUtils;
+import com.rr.trackexpense.server.util.TrackExpenseUtils;
+import com.rr.trackexpense.shared.model.Expense;
 
 public class TestExpenseParser {
 
