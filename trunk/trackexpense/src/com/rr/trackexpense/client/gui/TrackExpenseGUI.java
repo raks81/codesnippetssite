@@ -20,8 +20,6 @@ public class TrackExpenseGUI extends Composite {
 	public TrackExpenseGUI(TrackExpenseClientImpl serviceImpl) {
 		this.serviceImpl = serviceImpl;
 		initWidget(vPanel);
-		Label label = new Label("Hello!!");
-		vPanel.add(label);
 		Button btn1 = new Button("Get Expenses");
 		btn1.addClickHandler(new Btn1ClickHandler());
 		vPanel.add(btn1);
