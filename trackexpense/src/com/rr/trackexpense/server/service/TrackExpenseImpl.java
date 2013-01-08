@@ -16,4 +16,10 @@ public class TrackExpenseImpl extends RemoteServiceServlet implements
 		return dao.getExpenses();
 	}
 
+	@Override
+	public void deleteExpense(Expense expense) {
+		TrackexpenseDAO dao = new TrackexpenseDAO();
+		dao.deleteExpense(expense);
+	}
+
 }

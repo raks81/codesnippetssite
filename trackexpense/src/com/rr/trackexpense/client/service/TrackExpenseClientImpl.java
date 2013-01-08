@@ -26,6 +26,11 @@ public class TrackExpenseClientImpl implements ITrackExpenseClient {
 		this.service.getExpenses(new DefaultCallback());
 	}
 
+	@Override
+	public void deleteExpense(Expense expense) {
+		this.service.deleteExpense(expense, new DefaultCallback());
+	}
+
 	public TrackExpenseGUI getMaingui() {
 		return maingui;
 	}
@@ -35,12 +40,12 @@ public class TrackExpenseClientImpl implements ITrackExpenseClient {
 		@Override
 		public void onFailure(Throwable caught) {
 			System.out.println("Error!!: " + caught.getMessage());
-
 		}
 
 		@Override
 		public void onSuccess(Object result) {
-			getMaingui().updateTable((List<Expense>) result);
+			if (result instanceof List)
+				getMaingui().updateTable((List<Expense>) result);
 		}
 	}
 }

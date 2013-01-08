@@ -7,4 +7,6 @@ import com.rr.trackexpense.shared.model.Expense;
 
 public interface TrackExpenseServiceAsync {
 	void getExpenses(AsyncCallback<List<Expense>> callback);
+
+	void deleteExpense(Expense expense, AsyncCallback<Void> callback);
 }
