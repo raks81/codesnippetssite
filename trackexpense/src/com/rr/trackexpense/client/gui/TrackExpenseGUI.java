@@ -48,6 +48,9 @@ public class TrackExpenseGUI extends Composite {
 				if (vPanel.getWidgetIndex(grid) != -1) {
 					vPanel.remove(grid);
 				}
+				if (vPanel.getWidgetIndex(totalLbl) != -1) {
+					vPanel.remove(totalLbl);
+				}
 				serviceImpl.getExpenses();
 			}
 		});
@@ -112,9 +115,9 @@ public class TrackExpenseGUI extends Composite {
 										monthlyExpense.get(row), row));
 						grid.setWidget(row, 3, deleteBtn);
 					}
-					if (vPanel.getWidgetIndex(grid) < 0)
-						vPanel.add(grid);
+					vPanel.add(grid);
 					totalLbl = new Label("Total: " + total.toString());
+					vPanel.add(totalLbl);
 				}
 			}
 		}
