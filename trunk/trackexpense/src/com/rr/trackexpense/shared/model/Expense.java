@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Transient;
+
 public class Expense implements Serializable {
 	private Date spentDate;
 	private String spentOn;
 	private BigDecimal amount;
+	private Long expenseId;
 
 	public Expense() {
 
@@ -41,6 +44,15 @@ public class Expense implements Serializable {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+
+	@Transient
+	public Long getExpenseId() {
+		return expenseId;
+	}
+
+	public void setExpenseId(Long expenseId) {
+		this.expenseId = expenseId;
 	}
 
 }
