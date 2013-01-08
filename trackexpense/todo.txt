@@ -1,6 +1,6 @@
 order by date not working - DONE
 delete expense - DONE
-monthly report
+monthly report - DONE
 multiple expense add from email
 export as excel
 
