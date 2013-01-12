@@ -7,12 +7,18 @@
 		<servlet-name>mailhandler</servlet-name>
 		<servlet-class>com.rr.trackexpense.server.TrackexpenseEmailServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>trackExpenseService</servlet-name>
 		<servlet-class>com.rr.trackexpense.server.service.TrackExpenseImpl</servlet-class>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>gwtTableToExcelServlet</servlet-name>
+		<servlet-class>com.googlecode.gwtTableToExcel.server.TableToExcelServlet</servlet-class>
+	</servlet>
+
+
 
 	<servlet-mapping>
 		<servlet-name>Trackexpense</servlet-name>
@@ -25,6 +31,10 @@
 	<servlet-mapping>
 		<servlet-name>trackExpenseService</servlet-name>
 		<url-pattern>/trackexpense/trackexpenseservice</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>gwtTableToExcelServlet</servlet-name>
+		<url-pattern>/trackexpense/excel</url-pattern>
 	</servlet-mapping>
 
 

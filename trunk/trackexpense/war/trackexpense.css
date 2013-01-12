@@ -54,3 +54,15 @@ tr:nth-child(odd) {
 .bold {
 	font-weight: bold;
 }
+
+.gwt-table-to-excel-form {
+	
+}
+
+.gwt-table-to-excel-panel {
+	background-color: green;
+}
+
+.gwt-table-to-excel-exportWidget {
+	
+}

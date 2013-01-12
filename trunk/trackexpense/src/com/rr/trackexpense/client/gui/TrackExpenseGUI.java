@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.googlecode.gwtTableToExcel.client.TableToExcelClient;
 import com.rr.trackexpense.client.service.TrackExpenseClientImpl;
 import com.rr.trackexpense.shared.model.Expense;
 
@@ -31,6 +32,7 @@ public class TrackExpenseGUI extends Composite {
 	private TrackExpenseClientImpl serviceImpl;
 	private Label totalLbl = new Label();
 	private ListBox monthSelector = new ListBox();
+	private TableToExcelClient tableToExcelClient = new TableToExcelClient(grid);
 
 	/**
 	 * @param serviceImpl
@@ -45,12 +47,7 @@ public class TrackExpenseGUI extends Composite {
 		monthSelector.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
-				if (vPanel.getWidgetIndex(grid) != -1) {
-					vPanel.remove(grid);
-				}
-				if (vPanel.getWidgetIndex(totalLbl) != -1) {
-					vPanel.remove(totalLbl);
-				}
+				repaintTable();
 				serviceImpl.getExpenses();
 			}
 		});
@@ -61,15 +58,27 @@ public class TrackExpenseGUI extends Composite {
 		serviceImpl.getExpenses();
 	}
 
+	private void repaintTable() {
+		if (vPanel.getWidgetIndex(grid) != -1) {
+			vPanel.remove(grid);
+		}
+		if (vPanel.getWidgetIndex(totalLbl) != -1) {
+			vPanel.remove(totalLbl);
+		}
+		if (grid != null) {
+			if (tableToExcelClient != null
+					&& tableToExcelClient.getExportWidget() != null
+					&& vPanel.getWidgetIndex(tableToExcelClient
+							.getExportWidget()) != -1) {
+				vPanel.remove(tableToExcelClient.getExportWidget());
+			}
+		}
+	}
+
 	private class Btn1ClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-			if (vPanel.getWidgetIndex(grid) != -1) {
-				vPanel.remove(grid);
-			}
-			if (vPanel.getWidgetIndex(totalLbl) != -1) {
-				vPanel.remove(totalLbl);
-			}
+			repaintTable();
 			serviceImpl.getExpenses();
 		}
 	}
@@ -116,6 +125,8 @@ public class TrackExpenseGUI extends Composite {
 						grid.setWidget(row, 3, deleteBtn);
 					}
 					vPanel.add(grid);
+					tableToExcelClient = new TableToExcelClient(grid);
+					vPanel.add(tableToExcelClient.getExportWidget());
 					totalLbl = new Label("Total: " + total.toString());
 					vPanel.add(totalLbl);
 				}
