@@ -55,9 +55,12 @@ public class TrackExpenseGUI extends Composite {
 		vPanel.add(grid);
 		vPanel.add(totalLbl);
 		vPanel.add(btn1);
+		
+		
 		serviceImpl.getExpenses();
 	}
 
+	
 	private void repaintTable() {
 		if (vPanel.getWidgetIndex(grid) != -1) {
 			vPanel.remove(grid);

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,16 @@ public class TrackexpenseEmailServlet extends HttpServlet {
 			if (!StringUtils.isEmpty(message.getSubject())) {
 				expensesString = message.getSubject() + "\n";
 			} else {
-				expensesString += message.getContent().toString();
+				if (message.getContent() instanceof String)
+					expensesString += message.getContent().toString();
+				else if (message.getContent() instanceof MimeMultipart) {
+					MimeMultipart mp = ((MimeMultipart) message.getContent());
+					log.info(mp.getBodyPart(0).getContent().getClass() + " -> "
+							+ mp.getBodyPart(0).getContent().toString());
+					expensesString += mp.getBodyPart(0).getContent().toString();
+				} else
+					log.info("Received email with body of type: "
+							+ message.getContent().getClass());
 				log.info("Email message: " + expensesString);
 			}
 
