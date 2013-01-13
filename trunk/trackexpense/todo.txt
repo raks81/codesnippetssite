@@ -2,8 +2,9 @@ order by date not working - DONE
 delete expense - DONE
 monthly report - DONE
 export as excel - DONE
+multiple expense add from email - DONE
+Login - DONE
 
-multiple expense add from email
 
 edit expense
 add interface via GWT
