@@ -31,18 +31,19 @@ public class TrackExpenseUtils {
 
 	public static Expense convertToExpense(String sExpense) {
 		// Should be in this format:
-		// ~Expense - 100~
+		// Spent on lunch - 200
 		if (sExpense != null) {
 			sExpense = sExpense.trim();
 			try {
-//				sExpense = sExpense.substring(sExpense.indexOf("~") + 1,
-//						sExpense.lastIndexOf("~"));
+				// sExpense = sExpense.substring(sExpense.indexOf("~") + 1,
+				// sExpense.lastIndexOf("~"));
 				if (sExpense != null) {
 					Date defaultTime = Calendar.getInstance().getTime();
-					return new Expense(sExpense.substring(0,
-							sExpense.lastIndexOf("-")).trim(), defaultTime,
-							new BigDecimal(sExpense.substring(
-									sExpense.lastIndexOf("-") + 1).trim()));
+					String spentOn = sExpense.substring(0,
+							sExpense.indexOf("-")).trim();
+					BigDecimal spentAmount = new BigDecimal(sExpense.substring(
+							sExpense.indexOf("-") + 1).trim());
+					return new Expense(spentOn, defaultTime, spentAmount);
 				}
 			} catch (Exception e) {
 				log.severe("Could not parse: " + sExpense + "\n"
