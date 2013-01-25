@@ -30,7 +30,10 @@ public class TrackExpenseGUI extends Composite {
 	private VerticalPanel vPanel = new VerticalPanel();
 	private Grid grid = new Grid();
 	private TrackExpenseClientImpl serviceImpl;
-	private Label totalLbl = new Label();
+	private Label balanceLbl = new Label();
+	private Label totalSpentLbl = new Label();
+	private Label totalWithdrawalLbl = new Label();
+
 	private ListBox monthSelector = new ListBox();
 	private TableToExcelClient tableToExcelClient = new TableToExcelClient(grid);
 
@@ -53,21 +56,28 @@ public class TrackExpenseGUI extends Composite {
 		});
 
 		vPanel.add(grid);
-		vPanel.add(totalLbl);
+		vPanel.add(totalSpentLbl);
+		vPanel.add(totalWithdrawalLbl);
+		vPanel.add(balanceLbl);
 		vPanel.add(btn1);
-		
-		
+
 		serviceImpl.getExpenses();
 	}
 
-	
 	private void repaintTable() {
 		if (vPanel.getWidgetIndex(grid) != -1) {
 			vPanel.remove(grid);
 		}
-		if (vPanel.getWidgetIndex(totalLbl) != -1) {
-			vPanel.remove(totalLbl);
+		if (vPanel.getWidgetIndex(balanceLbl) != -1) {
+			vPanel.remove(balanceLbl);
 		}
+		if (vPanel.getWidgetIndex(totalSpentLbl) != -1) {
+			vPanel.remove(totalSpentLbl);
+		}
+		if (vPanel.getWidgetIndex(totalWithdrawalLbl) != -1) {
+			vPanel.remove(totalWithdrawalLbl);
+		}
+
 		if (grid != null) {
 			if (tableToExcelClient != null
 					&& tableToExcelClient.getExportWidget() != null
@@ -105,12 +115,21 @@ public class TrackExpenseGUI extends Composite {
 					// Create a grid
 					grid = new Grid(monthlyExpense.size(), 4);
 
-					Double total = 0d;
+					Double balance = 0d;
+					Double totalWithdrawals = 0d;
+					Double totalSpent = 0d;
 					int numRows = monthlyExpense.size();
 					int row = 0;
 					for (; row < numRows; row++) {
-						total += monthlyExpense.get(row).getAmount()
+						balance += monthlyExpense.get(row).getAmount()
 								.doubleValue();
+						if (monthlyExpense.get(row).getAmount().doubleValue() > 0)
+							totalSpent += monthlyExpense.get(row).getAmount()
+									.doubleValue();
+						else
+							totalWithdrawals += monthlyExpense.get(row)
+									.getAmount().doubleValue();
+
 						Date spentdate = monthlyExpense.get(row).getSpentDate();
 						grid.setWidget(row, 0, new Label(DateTimeFormat
 								.getShortDateFormat().format(spentdate)));
@@ -130,8 +149,17 @@ public class TrackExpenseGUI extends Composite {
 					vPanel.add(grid);
 					tableToExcelClient = new TableToExcelClient(grid);
 					vPanel.add(tableToExcelClient.getExportWidget());
-					totalLbl = new Label("Total: " + total.toString());
-					vPanel.add(totalLbl);
+
+					totalSpentLbl = new Label("Total Spent: "
+							+ totalSpent.toString());
+					vPanel.add(totalSpentLbl);
+
+					totalWithdrawalLbl = new Label("Total Withdrawals: "
+							+ totalWithdrawals.toString());
+					vPanel.add(totalWithdrawalLbl);
+
+					balanceLbl = new Label("Balance: " + balance.toString());
+					vPanel.add(balanceLbl);
 				}
 			}
 		}
