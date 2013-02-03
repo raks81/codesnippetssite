@@ -1,6 +1,7 @@
 package com.rr.trackexpense.client.gui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -102,7 +103,10 @@ public class TrackExpenseGUI extends Composite {
 			Map<String, List<Expense>> groupedExpenses = getMonthlyGroupedExpenses(expenses);
 
 			if (monthSelector.getItemCount() == 0) {
-				for (String month : groupedExpenses.keySet()) {
+				List<String> months = new ArrayList<String>(
+						groupedExpenses.keySet());
+				Collections.sort(months, Collections.reverseOrder());
+				for (String month : months) {
 					monthSelector.addItem(month);
 				}
 			}
