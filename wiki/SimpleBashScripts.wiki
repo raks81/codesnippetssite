@@ -27,12 +27,12 @@ user@local-host$ ssh remote-host
 Add the below to this file {{{~/.ssh/config}}}
 
 {{{
-Host d
-  HostName ccixuser-nprd3-03 
-  User rakrao
+Host alias1
+  HostName hostname
+  User username
 
-Host d4
-  HostName ccixuser-nprd4-04 
-  User rakrao
+Host alias2
+  HostName hosname2
+  User username
 
 }}}
