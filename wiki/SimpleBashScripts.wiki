@@ -15,3 +15,24 @@ for file in $(find . -iname "*.ZIP"); do
  fi ; 
 done
 }}}
+
+== Passwordless login in *nix systems ==
+{{{
+user@local-host$ ssh-keygen
+user@local-host$ ssh-copy-id -i ~/.ssh/id_rsa.pub remote-host
+user@local-host$ ssh remote-host
+}}}
+
+== ssh alias creation ==
+Add the below to this file {{{~/.ssh/config}}}
+
+{{{
+Host d
+  HostName ccixuser-nprd3-03 
+  User rakrao
+
+Host d4
+  HostName ccixuser-nprd4-04 
+  User rakrao
+
+}}}
