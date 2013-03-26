@@ -42,3 +42,8 @@ Host alias2
 {{{
 for line in `cat hosts.txt`; do   if [ `grep $line output.txt|wc -l` -eq 0 ] ; then echo $line; fi done
 }}}
+
+== Clean file based on pattern ==
+{{{
+for line in `cat output.txt`; do if [[ "$line" = *serialNumber* ]] ; then echo $line >> filtered.txt; fi done
+}}}
