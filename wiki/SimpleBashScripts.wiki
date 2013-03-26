@@ -36,3 +36,9 @@ Host alias2
   User username
 
 }}}
+
+== Check if list of patterns are in a file == 
+
+{{{
+for line in `cat hosts.txt`; do   if [ `grep $line output.txt|wc -l` -eq 0 ] ; then echo $line; fi done
+}}}
