@@ -1,0 +1,12 @@
+# Introduction #
+Query to find the table name and column name from the TABLEID and COLUMNID in DB2 exceptions
+
+# Details #
+```
+SELECT TABNAME, COLNAME FROM SYSCAT.COLUMNS 
+WHERE 
+COLNO=3 AND 
+	TABNAME=
+		(SELECT TABNAME FROM SYSCAT.TABLES WHERE TBSPACEID=23 AND TABLEID=6)
+
+```

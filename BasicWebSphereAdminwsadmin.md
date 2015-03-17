@@ -1,0 +1,5 @@
+# Introduction #
+
+This one is not a code snippet, but just some basic wsadmin commands used to connect to and install a war in WebSphere application serve 6.1.
+
+Page moved here http://codesnippetssite.blogspot.in/2013/11/introduction-this-one-is-not-code.html

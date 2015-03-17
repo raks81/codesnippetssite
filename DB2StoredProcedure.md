@@ -1,0 +1,4 @@
+# Introduction #
+I am not a database guy, but this one time I was cornered into writing a stored procedure on DB2 8.1. Below is the code which was written totally by googling around and painfully walking thru DB2 documentation. I am putting it here just a reference to stored proc syntax and DB2's basic control structs like if-else, while, using cursors etc.
+
+Page moved to http://codesnippetssite.blogspot.in/2009/05/a-sample-db2-stored-procedure.html

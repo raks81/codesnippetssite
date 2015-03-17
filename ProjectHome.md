@@ -1,0 +1,3 @@
+First of all this Google Code site is not related to any one specific project. It is just a place to store some code snippets I have written so that I can come back to when needed (I have a bad memory like lot of people). I think it was IBM's developerWorks that used the phrase "Code is out there..." and from my experience I sure believe in it. So this is a also my little contribution to the community.
+
+All code snippets are posted in the [Wiki](http://code.google.com/p/codesnippetssite/w/list) section. Please free to use the code for commercial or non-commercial purposes at your own risk! Comments are appreciated. :)

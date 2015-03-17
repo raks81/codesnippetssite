@@ -1,0 +1,10 @@
+# Details #
+
+Create a new shortcut with this as the target:
+```
+C:\Program Files\Mozilla Firefox\firefox.exe" -P "Work" -no-remote
+```
+
+When you open this shortcut you would be prompted to select the profile. By default there would be only one profile "Default User". Hit the Create button and give it some name of your choice. In my case my profile name is 'Work'. Make sure this name matches the value of the argument -P in the sortcut.
+
+This was tested in Firefox 3.6.3 and some earlier versions.

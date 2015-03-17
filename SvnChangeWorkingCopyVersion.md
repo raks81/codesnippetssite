@@ -1,0 +1,12 @@
+# Introduction #
+Running this script can fix issue caused when more than one SVN client is used on the same working copy of code. For eg. using tortoise SVN and eclipse plugin on the same working copy can cause this problem.
+
+Error message is usually something like "The client is too old to work with working copy. You need to get a newer Subversion client". This works with Python 3.1.2.
+
+The script needs to be saved to a file and this needs to be run
+
+```
+python change-svn-wc-format.py . 1.5
+```
+
+# Details #

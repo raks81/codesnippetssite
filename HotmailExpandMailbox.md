@@ -1,0 +1,20 @@
+#Greasemonkey script to expand the mailbox width
+
+# Introduction #
+
+This is a simple greasemonkey script to extend the width of the mailbox pane of windows live mail.
+Note: This works only with AdblockPlus enabled and blocks the ad on the right hand side.
+
+# Details #
+
+```
+
+// ==UserScript==
+// @name           expand
+// @namespace      http://code.google.com/p/codesnippetssite/w/edit/HotmailExpandMailbox
+// @include        http://sn121w.snt121.mail.live.com/default.aspx?rru=inbox
+// ==/UserScript==
+
+window.setTimeout(function() { document.getElementById('UIFrame').contentWindow.document.getElementById('MainContent').style.right = '0px'; }, 2000);
+
+```

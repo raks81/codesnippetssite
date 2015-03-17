@@ -1,0 +1,18 @@
+# Introduction #
+
+A simple javascript bookmark that will translate the current web page using Google Translate. The language is detected automatically by google. This has been tested only in IE 6 as of this writing. I am not sure how it would behave if the source URL is already escaped.
+
+
+# Details #
+Create a new bookmark and paste the code below as the URL field in the "Web Document" tab.
+
+```
+javascript:document.location.href="http://translate.google.co.in/translate?prev=hp&hl=en&js=y&u="+escape(document.location.href);
+```
+
+
+This bookmark will pop a prompt box where a word can be entered and then page will be loaded with the Google Translate page for that word. Change the "sl" parameter to the code of the source language. In the snippet below it is es=spanish.
+
+```
+javascript:document.location.href="http://translate.google.co.in/translate_t?hl=en&ie=UTF-8&text="+prompt("Enter the word you want to translate","")+"&sl=es&tl=en#"
+```

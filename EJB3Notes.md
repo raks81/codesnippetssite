@@ -1,0 +1,54 @@
+# Introduction #
+
+The notes on EJB3 below can be used to refresh ones memory. It is not an extensive tutorial by any means. The information below is from the [EJB 3 Simplified spec document ](http://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_JCP-Site/en_US/-/USD/VerifyItem-Start/ejb-3_0-fr-spec-simplified.pdf?BundledLineItemUUID=HxNIBe.mTy8AAAEkfHpqSt3l&OrderID=WmxIBe.m.5sAAAEkZHpqSt3l&ProductID=xLnACUFBJWkAAAEY3AY5AXuU&FileName=/ejb-3_0-fr-spec-simplified.pdf)
+
+
+# Details #
+
+## Session/Message Driven Beans ##
+  * Marked using annotations @Stateless, @Sateful.
+  * If a enterprise bean implements one interface, the methods in that interface become the business methods.
+  * If > 1 interface, the class or interfaces should be explicitly marked as @Remote or @Local as needed.
+  * What happens if not interface at all???? (Do all public methods of the class become the business methods??)
+  * Cannot extend javax.ejb.EJBObject or javax.ejb.EJBLocalObject.
+  * Business methods should not throw RemoteException.
+  * Methods marked @WebMethod are web services.
+  * In case of Stateful Session Bean a metod marked @Remove will remove the bean instance when called. eg:
+```
+@Remove public void finishShopping() {
+...
+}
+```
+
+
+## Interceptors ##
+  * Methods that intercept business method invocation (type1) and Lifecycle callback events(type2) are called Interceptors.
+  * Interceptor methods can be defined in the bean itself or in separate "Interceptor Claases"
+  * Should have a public no arg constructor.
+  * Interceptors are "chained" per the order in which they are annoted.
+  * Type1 can throw application and runtime exceotions, Type2 can throw Runtime exceptions.
+  * Type1 can be @AroundInvoke (Similar to method around advice of AOP), Type2 can use @PostConstruct, @PreDestroy, @PostActivate and @PrePassivate (only the first 2 in case of SLSB and all 4 incase of SFSB)
+
+
+## Context of the EJB and looking it up ##
+  * Bean Context = Its Container context + resource context + environment context.
+  * Some Dependency annotation - @EJB, @Resource
+> Usage:
+> Option 1:
+```
+@EJB(name="mySessionBean", beanInterface=MySessionIF.class)
+```
+> Option 2:
+```
+@EJB //reference name and type inferred from variable
+		  public AddressHome addressHome;
+```
+    * Setter Injection:
+```
+	@Resource(name=”customerDB”)
+	public void setDataSource(DataSource myDB) {
+	this.ds = myDB;
+	}
+
+```
+    * Lookups are performed via JNDI. HOW???? Add details

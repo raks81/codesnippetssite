@@ -1,0 +1,116 @@
+# Introduction #
+
+Some basic DB2 admin commands
+
+
+### To monitor the database all the monitor switches need to be turned ON at the dbm ###
+```
+> db2 get dbm cfg|grep DFT_MON
+
+   Buffer pool                         (DFT_MON_BUFPOOL) = ON
+   Lock                                   (DFT_MON_LOCK) = ON
+   Sort                                   (DFT_MON_SORT) = ON
+   Statement                              (DFT_MON_STMT) = ON
+   Table                                 (DFT_MON_TABLE) = ON
+   Timestamp                         (DFT_MON_TIMESTAMP) = ON
+   Unit of work                            (DFT_MON_UOW) = ON
+
+> db2 update dbm cfg using DFT_MON_BUFPOOL ON/OFF DFT_MON_LOCK ON/OFF
+```
+
+### To check the bufferpool hit ratio ###
+```
+db2pd –db dev –bufferpool
+```
+
+
+### To view the dbm and db cfg parameters ###
+```
+db2 get dbm cfg
+db2 get db cfg for dev
+```
+
+### To view the suggested parameters making use of autoconfigure utility ###
+```
+db2 autoconfigure apply none
+```
+
+
+
+### To view the DB siz ###
+```
+db2 connect to dev
+db2 “CALL GET_DBSIZE_INFO(?, ?, ?, -1)”
+```
+
+### To view all the active connections to the database ###
+```
+db2 list applications show detail
+```
+
+### To view the explain plan and to generate the db2 advisory tool ###
+Create the Explain tables for which the script EXPLAIN.DDL is located in ~/sqllib/misc folder
+```
+db2expln -database DEV -output query.sql.out -q "query..." -terminator ";"  -graph
+db2expln -database DEV -output query.sql.out -stmtfile query.sql -terminator ";"  -graph
+
+db2advis -d dev -o advis.out -s "query..." -t 5 > full_advis.out
+db2advis -d dev -o advis.out -i query.sql -t 5 > full_advis.out
+```
+
+
+### To view the diag log file for detail information of the database ###
+The diag file will have all the information regarding Load, Locks, Deadlocks etc.
+It is present in the following folder
+/home/db2inst2/sqllib/db2dump/db2diag.log
+
+
+### To find and kill locks ###
+  * 1 Find the locks in the db
+```
+db2 "list applications show detail"|grep -i lock
+```
+
+  * 2 Take the application id (example: 24183) from the list and execute this command to find which application is holding the lock:
+```
+db2 "get snapshot for locks on dbname"|less
+```
+> Search for 24183 in this, it will tell you the application that is holding the lock
+```
+Application handle                         = 24183
+Application ID                             = 53.59.133.104.49244.10082306373
+Sequence number                            = 05262
+Application name                           = java
+CONNECT Authorization ID                   = DB2INST1
+Application status                         = Lock-wait
+Status change time                         = 2010-08-27 10.54.31.786436
+Application code page                      = 1208
+Locks held                                 = 66
+Total wait time (ms)                       = 142927
+
+  ID of agent holding lock                 = 30518
+  Application ID holding lock              = 53.59.165.30.43527.100827083409
+  Lock name                                = 0x0300C1002F0040140000000052
+  Lock attributes                          = 0x00000000
+  Release flags                            = 0x00020000
+  Lock object type                         = Row
+  Lock mode                                = Exclusive Lock (X)
+  Lock mode requested                      = Next Key Share (NS)
+  Name of tablespace holding lock          = DATASPACE
+  Schema of table holding lock             = SCHEMA
+  Name of table holding lock               = TABLE
+  Data Partition Id of table holding lock  = 0
+  Lock wait start timestamp                = 2010-08-27 10.54.31.786436
+```
+
+
+  * 3 Check what 30518 is doing:
+```
+	db2 "get snapshot for application agentid 30518"|less
+```
+> At the very end of this, it will show what query it is executing (Also has all the detail (user id/ip address of requestor etc)
+
+  * 4 Kill this application by running this:
+```
+	db2 "force application (30518)"
+```

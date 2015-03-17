@@ -1,0 +1,28 @@
+# Introduction #
+
+A simple code snippet to find the physical location of a class. I use it frequently to debug classloading issues (...parent first, child first, where the f is the class loading from!!!)
+
+
+# Details #
+
+```
+import java.net.URL;
+
+public class ClassLocation {
+
+	public static String getClassLocation(Class c) {
+		String res = c.getSimpleName() + ".class";
+		URL url = c.getResource(res);
+		if (url == null) {
+			return null;
+		}
+		String s = url.toExternalForm();
+		return s;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getClassLocation(Object.class));
+	}
+}
+
+```

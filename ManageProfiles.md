@@ -1,0 +1,30 @@
+# Introduction #
+
+This little article explains how a new WebSphere profile can be created using the command line manageprofile.sh script that is available in /opt/IBM/WebSphere/AppServer/bin folder. This is needed if you are working in a Unix environment and do not have an X system available.
+
+
+# Details #
+The most basic flavor is to create a new profile with default settings. To get the help on default template use this command:
+
+```
+>./manageprofiles.sh -create -help -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/default
+```
+
+To create a new profile use this command:
+
+```
+>./manageprofiles.sh -create -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/default 
+-profileName AppSrv02 -profilePath /opt/IBM/WebSphere/AppServer/profiles/AppSrv02
+```
+
+You can use other command line arguments for the profile template that were listed in the output of help command above.
+
+**Note that all command line arguments are case sensitive**
+
+You obviously need to replace the absolute paths in the commands (/opt/IBM/WebSphere/AppServer) above with the installation directory of your WebSphere.
+
+Command to augment a profile is pretty similar. In the command below the newly created profile (AppSrv02) will be augmented with EJB3 fixpack for WAS 6.1. Note that the path of the template does not end at folder EJB, instead in a folder called default.ejb3fep:
+
+```
+manageprofiles.sh -augment -profileName AppSrv02 -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/EJB3/default.ejb3fep
+```

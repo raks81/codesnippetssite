@@ -1,0 +1,4 @@
+# Introduction #
+This wsadmin Jython script creates a a generic JMS provider and sets up a queue connection factory and queue destination. JCAPS 5.1.x was the message queue used and we were successfully able to connect to it from a web app running on WebSphere Application Server 6.1 using JMS interface. The configuration details here should help if you are trying to set up JCAPS 5.1.x as the message queue and trying to connect to it from WebSphere Application Server 6.1.
+
+Page moved here http://codesnippetssite.blogspot.in/2009/06/introduction-this-wsadmin-jython-script.html

@@ -1,0 +1,4 @@
+# Introduction #
+This is wsadmin Jython code snippet to install a WAR/EAR file in WebSphere Application Server. The script takes path to the WAR or EAR file and the context root of the web app as the parameter, installs the application on the server and starts the app.
+
+Page moved to http://codesnippetssite.blogspot.in/2013/11/install-ear-or-war-in-websphere.html
