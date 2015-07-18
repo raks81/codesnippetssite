@@ -26,9 +26,9 @@ Check installed drivers:
     less -p "nvidia|nouveau" /var/log/Xorg.0.log
 
     sudo lspci | grep -i nvidia
+    sudo lspci -vnn | grep -i VGA -A 12
 
     sudo glxinfo | egrep 'vendor|version'
-
 
 
 ###nomodeset
