@@ -27,6 +27,7 @@ Check installed drivers:
 
     sudo lspci | grep -i nvidia
     sudo lspci -vnn | grep -i VGA -A 12
+    sudo inxi -xG
 
     sudo glxinfo | egrep 'vendor|version'
 
