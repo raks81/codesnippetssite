@@ -17,19 +17,21 @@ Check which video driver is in use:
 
 Check installed drivers:
 
-    lsmod | grep -e nvidia -e nouveau
+    sudo lsmod | grep -e nvidia -e nouveau
 
     sudo modprobe nvidia
+    
+    sudo modinfo nvidia_331
 
     less -p "nvidia|nouveau" /var/log/Xorg.0.log
 
-    lspci | grep -i nvidia
+    sudo lspci | grep -i nvidia
 
     sudo glxinfo | egrep 'vendor|version'
 
 
 
-nomodeset
+###nomodeset
 The newest kernels have moved the video mode setting into the kernel. So all the programming of the hardware specific clock rates and registers on the video card happen in the kernel rather than in the X driver when the X server starts.. This makes it possible to have high resolution nice looking splash (boot) screens and flicker free transitions from boot splash to login screen. Unfortunately, on some cards this doesnt work properly and you end up with a black screen. Adding the nomodeset parameter instructs the kernel to not load video drivers and use BIOS modes instead until X is loaded.
 
 Note that this option is sometimes needed for nVidia cards when using the default "nouveau" drivers. Installing proprietary nvidia drivers usually makes this option no longer necessary, so it may not be needed to make this option permanent, just for one boot until you installed the nvidia drivers.
