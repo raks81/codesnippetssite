@@ -1,4 +1,5 @@
 Check which video driver is in use:
+        
         sudo lshw -c video
 
 $ sudo lshw -c video
@@ -18,6 +19,8 @@ $ sudo lshw -c video
 
 Check installed drivers:
 lsmod | grep -e nvidia -e nouveau
+
+sudo modprobe nvidia
 
 less -p "nvidia|nouveau" /var/log/Xorg.0.log
 
