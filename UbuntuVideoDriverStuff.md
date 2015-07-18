@@ -1,4 +1,4 @@
-Check which video driver is in use:     
+Check which video driver is in use:
   sudo lshw -c video
 
 $ sudo lshw -c video
